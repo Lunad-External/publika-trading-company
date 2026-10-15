@@ -150,8 +150,8 @@ const copy = (rel) => {
 {
   const src = read('image-slot.js');
   const needle = "'  -webkit-user-drag:none;user-select:none;touch-action:none}' +";
-  if (!src.includes(needle)) throw new Error('image-slot.js touch-action rule not found');
-  fs.writeFileSync(path.join(OUT, 'image-slot.js'), src.replace(needle, "'  -webkit-user-drag:none;user-select:none}' +"));
+  // Newer Claude Design exports already allow touch scrolling; only patch the old rule.
+  fs.writeFileSync(path.join(OUT, 'image-slot.js'), src.includes(needle) ? src.replace(needle, "'  -webkit-user-drag:none;user-select:none}' +") : src);
 }
 fs.copyFileSync(path.join(ROOT, 'build', 'mobile.css'), path.join(OUT, 'mobile.css'));
 for (const f of ['assets', 'support.js', 'image-manifest.json', 'ProductCard.dc.html', '.nojekyll']) {
