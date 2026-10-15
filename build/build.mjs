@@ -114,7 +114,7 @@ const legacyToClean = raw => {
 function transformPage(html, page, hash) {
   let out = html;
   // Base URL so every relative asset/script path resolves from the site root.
-  const boot = `<base href="${BASE}">\n<script>window.__PAGE=${JSON.stringify(page)};window.__HASH=${JSON.stringify(hash)};</script>\n<script src="routes.js"></script>`;
+  const boot = `<base href="${BASE}">\n<link rel="stylesheet" href="mobile.css">\n<script>window.__PAGE=${JSON.stringify(page)};window.__HASH=${JSON.stringify(hash)};</script>\n<script src="routes.js"></script>`;
   out = out.replace(/<head>/i, '<head>\n' + boot);
   // Route from the clean path instead of location.hash.
   out = out.split('window.location.hash.slice(1)').join("(window.__HASH||'')");
@@ -145,7 +145,16 @@ const copy = (rel) => {
   fs.mkdirSync(path.dirname(dst), { recursive: true });
   fs.cpSync(src, dst, { recursive: true });
 };
-for (const f of ['assets', 'support.js', 'image-slot.js', 'image-manifest.json', 'ProductCard.dc.html', '.nojekyll']) {
+// image-slot.js: images must not swallow touch gestures, or the page can't be
+// scrolled with a thumb on a photo (touch-action is only needed in edit mode).
+{
+  const src = read('image-slot.js');
+  const needle = "'  -webkit-user-drag:none;user-select:none;touch-action:none}' +";
+  if (!src.includes(needle)) throw new Error('image-slot.js touch-action rule not found');
+  fs.writeFileSync(path.join(OUT, 'image-slot.js'), src.replace(needle, "'  -webkit-user-drag:none;user-select:none}' +"));
+}
+fs.copyFileSync(path.join(ROOT, 'build', 'mobile.css'), path.join(OUT, 'mobile.css'));
+for (const f of ['assets', 'support.js', 'image-manifest.json', 'ProductCard.dc.html', '.nojekyll']) {
   if (fs.existsSync(path.join(ROOT, f))) copy(f);
 }
 

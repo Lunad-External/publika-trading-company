@@ -1,0 +1,85 @@
+/* Responsive layer for the Publika site (added to every page by build/build.mjs).
+   The design files use inline styles sized for desktop; these rules adapt them
+   for tablets and phones. Selectors match the inline style text as the browser serialises it, so they keep
+   working when the pages are re-exported from Claude Design. */
+
+html, body { overflow-x: clip; }
+img { max-width: 100%; }
+
+/* ---------- Tablet and below ---------- */
+@media (max-width: 1039px) {
+  /* Sidebar + content and article + aside layouts stack */
+  [style*="grid-template-columns: minmax(240px, 280px) minmax(0px, 1fr)"],
+  [style*="grid-template-columns: minmax(0px, 7fr) minmax(0px, 3fr)"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 32px !important;
+  }
+  [style*="grid-template-columns: repeat(4, minmax(0px, 1fr))"],
+  [style*="grid-template-columns: repeat(5, minmax(0px, 1fr))"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  /* Sticky sidebars would float over the stacked content */
+  [style*="position: sticky"][style*="top: 110px"] { position: static !important; }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 760px) {
+  [style*="grid-template-columns: repeat(3, minmax(0px, 1fr))"],
+  [style*="grid-template-columns: repeat(4, minmax(0px, 1fr))"],
+  [style*="grid-template-columns: repeat(5, minmax(0px, 1fr))"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  [style*="grid-template-columns: repeat(2, minmax(0px, 1fr))"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  /* Buttons: let labels wrap instead of being cut off */
+  a[style*="white-space: nowrap"][style*="height: "],
+  button[style*="white-space: nowrap"][style*="height: "] {
+    white-space: normal !important;
+    height: auto !important;
+    min-height: 40px;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    gap: 6px !important;
+    font-size: 13.5px !important;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  /* Grids whose minimum column is wider than a phone screen */
+  [style*="minmax(320px, 1fr)"] { grid-template-columns: minmax(0, 1fr) !important; }
+
+  /* Category listing: two product cards per row */
+  [style*="minmax(210px, 1fr)"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+  [data-href][style*="padding: 14px"] { padding: 10px !important; gap: 10px !important; }
+
+  /* Filter list: keep it short so products are visible without long scrolling */
+  nav[style*="max-height: 560px"] { max-height: 232px !important; }
+
+  /* Roomy desktop panels get phone-sized padding */
+  [style*="padding: 48px 44px"], [style*="padding: 44px 40px"] { padding: 32px 22px !important; }
+
+  /* Hero slider: the progress bars are enough; the arrows collided with the chat button */
+  button[aria-label="Previous"], button[aria-label="Next"] { display: none !important; }
+
+  /* Cart rows: smaller thumbnail so the details have room */
+  [style*="grid-template-columns: 110px minmax(0px, 1fr)"] {
+    grid-template-columns: 76px minmax(0, 1fr) !important;
+    gap: 14px !important;
+    padding: 14px !important;
+  }
+  a[style*="width: 110px"][style*="height: 110px"] { width: 76px !important; height: 76px !important; }
+
+  /* Centered feature cards (About Us principles etc.) */
+  [style*="padding: 32px 24px"][style*="text-align: center"] { padding: 22px 12px !important; }
+  [style*="grid-template-columns: repeat(3, minmax(0px, 1fr))"][style*="gap: 20px"] { gap: 12px !important; }
+
+  /* WhatsApp button: slightly smaller and tucked into the corner */
+  a[data-wa-float] { right: 14px !important; bottom: 14px !important; height: 50px !important; padding: 0 12px !important; }
+}
