@@ -29,6 +29,34 @@ input,textarea,button{font-family:inherit}
 /* whatsapp float */
 [data-wa-float] [data-wa-label]{transition:max-width .45s cubic-bezier(.2,.7,.2,1),opacity .3s ease,margin-left .45s cubic-bezier(.2,.7,.2,1)}
 [data-wa-float]:hover [data-wa-label],[data-wa-float]:focus-visible [data-wa-label]{max-width:140px !important;opacity:1 !important;margin-left:10px !important}
+
+/* responsive */
+html,body{max-width:100%;overflow-x:clip}
+@media (max-width:1039px){
+[style*="grid-template-columns: repeat(4, minmax(0px, 1fr))"],[style*="grid-template-columns: repeat(5, minmax(0px, 1fr))"]{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+[style*="grid-template-columns: minmax(240px, 280px) minmax(0px, 1fr)"],[style*="grid-template-columns: minmax(0px, 7fr) minmax(0px, 3fr)"],[style*="grid-template-columns: minmax(0px, 1.7fr)"]{grid-template-columns:minmax(0,1fr) !important;gap:28px !important}
+aside[style*="position: sticky"],div[style*="position: sticky"]:not(header){position:static !important}
+}
+@media (max-width:759px){
+[style*="grid-template-columns: repeat(4, minmax(0px, 1fr))"],[style*="grid-template-columns: repeat(5, minmax(0px, 1fr))"],[style*="grid-template-columns: repeat(3, minmax(0px, 1fr))"]{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+[style*="grid-template-columns: repeat(2, minmax(0px, 1fr))"]{grid-template-columns:minmax(0,1fr) !important}
+[style*="minmax(300px"],[style*="minmax(320px"],[style*="minmax(340px"],[style*="minmax(360px"],[style*="minmax(380px"],[style*="minmax(400px"],[style*="minmax(420px"],[style*="minmax(440px"],[style*="minmax(480px"]{grid-template-columns:minmax(0,1fr) !important}
+[style*="grid-template-columns: repeat(auto-fill, minmax(210px, 1fr))"]{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:12px !important}
+[style*="grid-template-columns: repeat(auto-fill, minmax(210px, 1fr))"] > [data-href]{padding:10px !important}
+nav[style*="max-height: 560px"]{max-height:230px !important}
+button[style*="height: 42px"],button[style*="height: 44px"]:not([aria-label]),button[style*="height: 50px"],a[style*="height: 42px"][style*="white-space: nowrap"],a[style*="height: 46px"][style*="white-space: nowrap"]{height:auto !important;min-height:40px;padding:8px 10px !important;font-size:13.5px !important;white-space:normal !important;text-align:center;line-height:1.25 !important}
+[style*="padding: 48px 44px"],[style*="padding: 44px 40px"]{padding:32px 22px !important}
+[data-principle]{padding:22px 12px !important}
+[data-principles]{gap:12px !important}
+[style*="grid-template-columns: 110px minmax(0px, 1fr)"]{grid-template-columns:76px minmax(0,1fr) !important;gap:14px !important;padding:14px !important}
+a[style*="width: 110px; height: 110px"]{width:76px !important;height:76px !important}
+[data-wa-float]{right:14px !important;bottom:14px !important;height:50px !important;padding:0 13px !important}
+[data-hero-arrow]{display:none !important}
+[data-proj-meta]{justify-content:flex-start !important;text-align:left !important;flex-wrap:wrap !important}
+[data-kt] , [data-kt] *{white-space:normal !important}
+section[style*="padding: 88px 24px"],div[style*="padding: 88px 24px"]{padding:56px 18px !important}
+h1,h2,h3{overflow-wrap:anywhere}
+}
 </style>
 <script src="search-index.js"></script>
 </helmet>
@@ -180,28 +208,28 @@ input,textarea,button{font-family:inherit}
 
 <section data-screen-label="Core values" style="max-width:1320px;margin:0 auto;padding:88px 24px">
   <div style="text-align:center;margin-bottom:44px"><h2 style="margin:0;font-family:'Poppins',sans-serif;font-size:clamp(26px,2.6vw,34px);font-weight:600;color:#22546f">The Principles We Live By</h2></div>
-  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:1100px;margin:0 auto">
-    <div style="border:1px solid #e3eaeb;border-radius:12px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;transition:border-color .25s, box-shadow .25s" style-hover="border-color:#1d989f;box-shadow:0 14px 30px rgba(29,152,159,0.12)">
+  <div data-principles="1" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:1100px;margin:0 auto">
+    <div data-principle="1" style="border:1px solid #e3eaeb;border-radius:12px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;transition:border-color .25s, box-shadow .25s" style-hover="border-color:#1d989f;box-shadow:0 14px 30px rgba(29,152,159,0.12)">
       <div style="width:72px;height:72px;border-radius:50%;background:#eef6f7;display:flex;align-items:center;justify-content:center"><img src="assets/remote/publika/2023/01/ab-1.png" alt="" style="width:40px;height:40px;object-fit:contain;filter:brightness(0) saturate(100%) invert(26%) sepia(45%) saturate(1100%) hue-rotate(170deg) brightness(92%) contrast(92%)"></div>
       <h3 style="margin:0;font-family:'Poppins',sans-serif;font-size:18px;font-weight:600;color:#22546f">Creativity</h3>
       <p style="margin:0;font-size:15px;line-height:1.6;color:#5b6b73">Trending designs.</p>
     </div>
-    <div style="border:1px solid #e3eaeb;border-radius:12px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;transition:border-color .25s, box-shadow .25s" style-hover="border-color:#1d989f;box-shadow:0 14px 30px rgba(29,152,159,0.12)">
+    <div data-principle="1" style="border:1px solid #e3eaeb;border-radius:12px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;transition:border-color .25s, box-shadow .25s" style-hover="border-color:#1d989f;box-shadow:0 14px 30px rgba(29,152,159,0.12)">
       <div style="width:72px;height:72px;border-radius:50%;background:#eef6f7;display:flex;align-items:center;justify-content:center"><img src="assets/remote/publika/2023/01/ab-2.png" alt="" style="width:40px;height:40px;object-fit:contain;filter:brightness(0) saturate(100%) invert(26%) sepia(45%) saturate(1100%) hue-rotate(170deg) brightness(92%) contrast(92%)"></div>
       <h3 style="margin:0;font-family:'Poppins',sans-serif;font-size:18px;font-weight:600;color:#22546f">Design Led</h3>
       <p style="margin:0;font-size:15px;line-height:1.6;color:#5b6b73">Compatible designs for every interior setting.</p>
     </div>
-    <div style="border:1px solid #e3eaeb;border-radius:12px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;transition:border-color .25s, box-shadow .25s" style-hover="border-color:#1d989f;box-shadow:0 14px 30px rgba(29,152,159,0.12)">
+    <div data-principle="1" style="border:1px solid #e3eaeb;border-radius:12px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;transition:border-color .25s, box-shadow .25s" style-hover="border-color:#1d989f;box-shadow:0 14px 30px rgba(29,152,159,0.12)">
       <div style="width:72px;height:72px;border-radius:50%;background:#eef6f7;display:flex;align-items:center;justify-content:center"><img src="assets/remote/publika/2023/01/ab-3.png" alt="" style="width:40px;height:40px;object-fit:contain;filter:brightness(0) saturate(100%) invert(26%) sepia(45%) saturate(1100%) hue-rotate(170deg) brightness(92%) contrast(92%)"></div>
       <h3 style="margin:0;font-family:'Poppins',sans-serif;font-size:18px;font-weight:600;color:#22546f">Sustainable Range</h3>
       <p style="margin:0;font-size:15px;line-height:1.6;color:#5b6b73">Compatible designs for every interior setting.</p>
     </div>
-    <div style="border:1px solid #e3eaeb;border-radius:12px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;transition:border-color .25s, box-shadow .25s" style-hover="border-color:#1d989f;box-shadow:0 14px 30px rgba(29,152,159,0.12)">
+    <div data-principle="1" style="border:1px solid #e3eaeb;border-radius:12px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;transition:border-color .25s, box-shadow .25s" style-hover="border-color:#1d989f;box-shadow:0 14px 30px rgba(29,152,159,0.12)">
       <div style="width:72px;height:72px;border-radius:50%;background:#eef6f7;display:flex;align-items:center;justify-content:center"><img src="assets/remote/publika/2023/01/ab-4.png" alt="" style="width:40px;height:40px;object-fit:contain;filter:brightness(0) saturate(100%) invert(26%) sepia(45%) saturate(1100%) hue-rotate(170deg) brightness(92%) contrast(92%)"></div>
       <h3 style="margin:0;font-family:'Poppins',sans-serif;font-size:18px;font-weight:600;color:#22546f">Quality-Centric</h3>
       <p style="margin:0;font-size:15px;line-height:1.6;color:#5b6b73">Prime materials that guarantee the best durability.</p>
     </div>
-    <div style="border:1px solid #e3eaeb;border-radius:12px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;transition:border-color .25s, box-shadow .25s" style-hover="border-color:#1d989f;box-shadow:0 14px 30px rgba(29,152,159,0.12)">
+    <div data-principle="1" style="border:1px solid #e3eaeb;border-radius:12px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;transition:border-color .25s, box-shadow .25s" style-hover="border-color:#1d989f;box-shadow:0 14px 30px rgba(29,152,159,0.12)">
       <div style="width:72px;height:72px;border-radius:50%;background:#eef6f7;display:flex;align-items:center;justify-content:center"><img src="assets/remote/publika/2023/01/ab-5.png" alt="" style="width:40px;height:40px;object-fit:contain;filter:brightness(0) saturate(100%) invert(26%) sepia(45%) saturate(1100%) hue-rotate(170deg) brightness(92%) contrast(92%)"></div>
       <h3 style="margin:0;font-family:'Poppins',sans-serif;font-size:18px;font-weight:600;color:#22546f">Futuristically Innovative</h3>
       <p style="margin:0;font-size:15px;line-height:1.6;color:#5b6b73">Supported with the recent tech &amp; innovative drive.</p>
@@ -306,6 +334,30 @@ input,textarea,button{font-family:inherit}
         </div>
       </a>
     </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="Google reviews" style="position:relative;overflow:hidden;background:#0f2e3d;color:#ffffff">
+  <div style="position:absolute;right:-60px;top:-80px;font-family:Georgia,serif;font-size:420px;line-height:1;color:rgba(29,152,159,0.14);pointer-events:none" aria-hidden="true">&#8220;</div>
+  <div style="position:relative;max-width:1320px;margin:0 auto;padding:80px 24px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:36px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:12px"><svg width="28" height="28" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"></path><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"></path><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"></path><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"></path></svg><h2 style="margin:0;font-family:'Poppins',sans-serif;font-size:clamp(28px,3vw,40px);font-weight:600;color:#ffffff">Google reviews</h2></div>
+        <p style="margin:0;font-size:16px;line-height:1.7;color:rgba(255,255,255,0.72);max-width:520px">What contractors, consultants and clients say about working with Publika.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px"><span style="margin-right:8px;font-family:'Poppins',sans-serif;font-size:14px;color:rgba(255,255,255,0.6)">{{ revCount }}</span><button onClick="{{ revPrev2 }}" aria-label="Previous reviews" style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,0.35);background:transparent;color:#ffffff;font-size:20px;cursor:pointer;transition:background .2s,border-color .2s" style-hover="background:#1d989f;border-color:#1d989f">‹</button><button onClick="{{ revNext2 }}" aria-label="Next reviews" style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,0.35);background:transparent;color:#ffffff;font-size:20px;cursor:pointer;transition:background .2s,border-color .2s" style-hover="background:#1d989f;border-color:#1d989f">›</button></div>
+    </div>
+    <div data-swipe="rev" style="overflow:hidden;margin:-20px;padding:20px;touch-action:pan-y">
+      <div style="display:flex;gap:24px;transform:translateX({{ revShift }});transition:transform .6s ease">
+        <sc-for list="{{ revs }}" as="r" hint-placeholder-count="3">
+          <figure style="flex:0 0 {{ revBasis }};min-width:0;box-sizing:border-box;margin:0;padding:clamp(24px,2.6vw,34px);background:#ffffff;color:#1c2b33;border-radius:16px;box-shadow:0 20px 44px rgba(0,0,0,0.22);display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;gap:3px" aria-label="5 out of 5 stars"><svg width="18" height="18" viewBox="0 0 24 24" fill="#f5b400" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"></path></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="#f5b400" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"></path></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="#f5b400" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"></path></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="#f5b400" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"></path></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="#f5b400" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.5 6.6-.8z"></path></svg></div>
+            <blockquote style="margin:0;flex:1;font-family:'Poppins',sans-serif;font-size:17px;font-weight:500;line-height:1.6;color:#22546f;text-wrap:pretty">“{{ r.text }}”</blockquote>
+            <figcaption style="display:flex;flex-direction:column;gap:2px;padding-top:16px;border-top:1px solid #e3eaeb"><span style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:600;color:#1c2b33">{{ r.name }}</span><span style="font-size:13px;color:#5b6b73">Google review</span></figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -464,6 +516,8 @@ class Component extends DCLogic {
   clrRef = React.createRef();
 
   componentDidMount() {
+    this.onSwipe = e => { const z = e.target.closest && e.target.closest('[data-swipe]'); if (!z) return; if (e.type === 'touchstart') { this.sw = { k: z.dataset.swipe, x: e.touches[0].clientX, y: e.touches[0].clientY }; return; } const s = this.sw; this.sw = null; if (!s || s.k !== z.dataset.swipe) return; const dx = e.changedTouches[0].clientX - s.x, dy = e.changedTouches[0].clientY - s.y; if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.2) return; if (s.k === 'rev') (dx < 0 ? this.revNextFn : this.revPrevFn) && (dx < 0 ? this.revNextFn() : this.revPrevFn()); else if (s.k === 'feat' && !e.target.closest('[data-snap-row],[data-noscroll]')) { const n = this.featN || 1; this.setState(st => ({ featSel: ((st.featSel || 0) + (dx < 0 ? 1 : -1) + n) % n })); } };
+    document.addEventListener('touchstart', this.onSwipe, { passive: true }); document.addEventListener('touchend', this.onSwipe, { passive: true });
     this.onResize = () => this.setState({ w: window.innerWidth });
     this.onResize();
     window.addEventListener('resize', this.onResize);
@@ -524,6 +578,22 @@ class Component extends DCLogic {
       sqKey: e => { if (e.key === 'Enter' && res[0]) window.location.href = res[0].h; if (e.key === 'Escape') this.setState({ sqFocus: false }); }
     };
   }
+  reviewVals() {
+    const R = [["Kistena King","I love the fitting cabinets, well designed and good quality. I would highly recommended this company!"],["Yousuf Rangwala","Their professionalism, commitment, and market knowledge have been invaluable in successfully delivering projects. The team is highly responsive, proactive, and always ensures smooth coordination between suppliers and clients. Their dedication to quality and customer service truly sets them apart."],["Mohammad Abbas Rasul","Reliable company with excellent service and high-quality materials. We have been working with Publika Building Materials for years now, and I highly recommend them. They are responsive to inquiries and project needs, ensuring smooth and efficient collaboration."],["Irfan Haque","A highly professional company with a great team and prompt responses. They offer a wide range of quality products from reputable brands. Wishing them continued success!"],["Moataz Moghazi","Very efficient and reliable. The quality of fittings is very good. Great work, keep it up!"],["Mai Nadim","Was really impressed with the quality of work and efficiency of the team and would definitely recommend the company"],["Abubakr Al Tekreeti","Advise all to try working with them and see the difference! sure after will continue forever"],["PAUL KURIAN","they have solution for anything and everything. With extreme fast response and support."],["sherif Nassef","Very good as quality wise and well understanding technical team"],["Khaldoun Baddour","Experts in building materials and more.Highly recommend and trust worthy."],["Salah Eissa","Best service, quality and fast delivery"],["Mohamed Mubarak","Thanks for your services !"],["Fady Fouad","Best services and best prices 👍🏻"],["Mariam Mariam","Best building material to work with"],["Hams Samir","Perfect matrielis and design 👌"],["Sonny Janabi","Greet work"]];
+    const n = R.length, per = (this.state.w || window.innerWidth) >= 760 ? 3 : 1, max = n - per;
+    const cur = Math.min(Math.max(this.state.revIdx || 0, 0), max);
+    const tick = () => this.setState(s => { const m = R.length - ((s.w || window.innerWidth) >= 760 ? 3 : 1); return { revIdx: (s.revIdx || 0) >= m ? 0 : (s.revIdx || 0) + 1 }; });
+    const go = i => { this.setState({ revIdx: i > max ? 0 : i < 0 ? max : i }); clearInterval(this.revT); this.revT = setInterval(tick, 5000); };
+    if (!this.revT) this.revT = setInterval(tick, 5000);
+    if (!this.revRs) { this.revRs = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.revRs); }
+    return {
+      revs: R.map(([name, text]) => ({ name, text })),
+      revBasis: per === 3 ? 'calc((100% - 48px) / 3)' : '100%',
+      revShift: 'calc(' + (-cur) + ' * (100% + 24px) / ' + per + ')',
+      revPrev2: (this.revPrevFn = () => go(cur - 1)), revNext2: (this.revNextFn = () => go(cur + 1)),
+      revCount: String(cur + 1).padStart(2, '0') + (per === 3 ? '–' + String(cur + 3).padStart(2, '0') : '') + ' / ' + String(n).padStart(2, '0')
+    };
+  }
   renderVals() {
     const { idx, started, cart, form } = this.state;
     const zoom = this.props.zoom ?? 0.12;
@@ -546,7 +616,7 @@ class Component extends DCLogic {
       };
     });
     return {
-      ...this.searchVals(),
+      ...this.searchVals(), ...this.reviewVals(),
       showTopBar: this.props.showTopBar ?? true,
       isDesktop: this.state.w >= 1040, isMobile: this.state.w < 1040,
       mobileNavOpen: this.state.mobileNav && this.state.w < 1040,
@@ -566,7 +636,7 @@ class Component extends DCLogic {
       sanitary: map('sanitary'),
       porcelain: map('porcelain'),
       frp: map('frp'),
-      ...this.scroller('san'), ...this.scroller('por'), ...this.scroller('frp'), ...this.scroller('cat', 400), ...this.scroller('blog', 400), ...this.scroller('proj', 400),
+      ...this.scroller('rev', 360), ...this.scroller('san'), ...this.scroller('por'), ...this.scroller('frp'), ...this.scroller('cat', 400), ...this.scroller('blog', 400), ...this.scroller('proj', 400),
       clrRef: this.clrRef,
       clrPrev: () => this.clrRef.current && this.clrRef.current.scrollBy({ left: -536, behavior: 'smooth' }),
       clrNext: () => this.clrRef.current && this.clrRef.current.scrollBy({ left: 536, behavior: 'smooth' }),

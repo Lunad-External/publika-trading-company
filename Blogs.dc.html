@@ -29,6 +29,35 @@ input,textarea,button{font-family:inherit}
 /* whatsapp float */
 [data-wa-float] [data-wa-label]{transition:max-width .45s cubic-bezier(.2,.7,.2,1),opacity .3s ease,margin-left .45s cubic-bezier(.2,.7,.2,1)}
 [data-wa-float]:hover [data-wa-label],[data-wa-float]:focus-visible [data-wa-label]{max-width:140px !important;opacity:1 !important;margin-left:10px !important}
+
+/* responsive */
+html,body{max-width:100%;overflow-x:clip}
+@media (max-width:1039px){
+[style*="grid-template-columns: repeat(4, minmax(0px, 1fr))"],[style*="grid-template-columns: repeat(5, minmax(0px, 1fr))"]{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+[style*="grid-template-columns: minmax(240px, 280px) minmax(0px, 1fr)"],[style*="grid-template-columns: minmax(0px, 7fr) minmax(0px, 3fr)"],[style*="grid-template-columns: minmax(0px, 1.7fr)"]{grid-template-columns:minmax(0,1fr) !important;gap:28px !important}
+aside[style*="position: sticky"],div[style*="position: sticky"]:not(header){position:static !important}
+}
+@media (max-width:759px){
+[style*="grid-template-columns: repeat(4, minmax(0px, 1fr))"],[style*="grid-template-columns: repeat(5, minmax(0px, 1fr))"],[style*="grid-template-columns: repeat(3, minmax(0px, 1fr))"]{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+[style*="grid-template-columns: repeat(2, minmax(0px, 1fr))"]{grid-template-columns:minmax(0,1fr) !important}
+[style*="minmax(300px"],[style*="minmax(320px"],[style*="minmax(340px"],[style*="minmax(360px"],[style*="minmax(380px"],[style*="minmax(400px"],[style*="minmax(420px"],[style*="minmax(440px"],[style*="minmax(480px"]{grid-template-columns:minmax(0,1fr) !important}
+[style*="grid-template-columns: repeat(auto-fill, minmax(210px, 1fr))"]{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:12px !important}
+[style*="grid-template-columns: repeat(auto-fill, minmax(210px, 1fr))"] > [data-href]{padding:10px !important}
+nav[style*="max-height: 560px"]{max-height:230px !important}
+button[style*="height: 42px"],button[style*="height: 44px"]:not([aria-label]),button[style*="height: 50px"],a[style*="height: 42px"][style*="white-space: nowrap"],a[style*="height: 46px"][style*="white-space: nowrap"]{height:auto !important;min-height:40px;padding:8px 10px !important;font-size:13.5px !important;white-space:normal !important;text-align:center;line-height:1.25 !important}
+[style*="padding: 48px 44px"],[style*="padding: 44px 40px"]{padding:32px 22px !important}
+[data-principle]{padding:22px 12px !important}
+[data-principles]{gap:12px !important}
+[style*="grid-template-columns: 110px minmax(0px, 1fr)"]{grid-template-columns:76px minmax(0,1fr) !important;gap:14px !important;padding:14px !important}
+a[style*="width: 110px; height: 110px"]{width:76px !important;height:76px !important}
+[data-wa-float]{right:14px !important;bottom:14px !important;height:50px !important;padding:0 13px !important}
+[data-hero-arrow]{display:none !important}
+[data-proj-meta]{justify-content:flex-start !important;text-align:left !important;flex-wrap:wrap !important}
+[data-kt] , [data-kt] *{white-space:normal !important}
+[style*="grid-template-columns: auto 1fr"]{grid-template-columns:minmax(0,1fr) !important;gap:4px 0 !important}
+section[style*="padding: 88px 24px"],div[style*="padding: 88px 24px"]{padding:56px 18px !important}
+h1,h2,h3{overflow-wrap:anywhere}
+}
 </style>
 <script src="search-index.js"></script>
 </helmet>
@@ -181,7 +210,7 @@ input,textarea,button{font-family:inherit}
     <aside style="position:sticky;top:110px;background:#f4f8f8;border:1px solid #e3eaeb;border-radius:14px;padding:28px 26px;display:flex;flex-direction:column;gap:16px">
       <h3 style="margin:0 0 4px;font-family:'Poppins',sans-serif;font-size:20px;font-weight:600;color:#22546f">Key Takeaways</h3>
       <sc-for list="{{ d.keys }}" as="kt" hint-placeholder-count="8">
-        <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;background:#1d989f;color:#ffffff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px">✓</span><span style="font-size:15px;line-height:1.55;color:#1c2b33">{{ kt }}</span></div>
+        <div data-kt="1" style="display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;background:#1d989f;color:#ffffff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px">✓</span><span style="font-size:15px;line-height:1.55;color:#1c2b33">{{ kt }}</span></div>
       </sc-for>
     </aside>
   </div>

@@ -29,6 +29,35 @@ input,textarea,button{font-family:inherit}
 /* whatsapp float */
 [data-wa-float] [data-wa-label]{transition:max-width .45s cubic-bezier(.2,.7,.2,1),opacity .3s ease,margin-left .45s cubic-bezier(.2,.7,.2,1)}
 [data-wa-float]:hover [data-wa-label],[data-wa-float]:focus-visible [data-wa-label]{max-width:140px !important;opacity:1 !important;margin-left:10px !important}
+
+/* responsive */
+html,body{max-width:100%;overflow-x:clip}
+@media (max-width:1039px){
+[style*="grid-template-columns: repeat(4, minmax(0px, 1fr))"],[style*="grid-template-columns: repeat(5, minmax(0px, 1fr))"]{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+[style*="grid-template-columns: minmax(240px, 280px) minmax(0px, 1fr)"],[style*="grid-template-columns: minmax(0px, 7fr) minmax(0px, 3fr)"],[style*="grid-template-columns: minmax(0px, 1.7fr)"]{grid-template-columns:minmax(0,1fr) !important;gap:28px !important}
+aside[style*="position: sticky"],div[style*="position: sticky"]:not(header){position:static !important}
+}
+@media (max-width:759px){
+[style*="grid-template-columns: repeat(4, minmax(0px, 1fr))"],[style*="grid-template-columns: repeat(5, minmax(0px, 1fr))"],[style*="grid-template-columns: repeat(3, minmax(0px, 1fr))"]{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+[style*="grid-template-columns: repeat(2, minmax(0px, 1fr))"]{grid-template-columns:minmax(0,1fr) !important}
+[style*="minmax(300px"],[style*="minmax(320px"],[style*="minmax(340px"],[style*="minmax(360px"],[style*="minmax(380px"],[style*="minmax(400px"],[style*="minmax(420px"],[style*="minmax(440px"],[style*="minmax(480px"]{grid-template-columns:minmax(0,1fr) !important}
+[style*="grid-template-columns: repeat(auto-fill, minmax(210px, 1fr))"]{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:12px !important}
+[style*="grid-template-columns: repeat(auto-fill, minmax(210px, 1fr))"] > [data-href]{padding:10px !important}
+nav[style*="max-height: 560px"]{max-height:230px !important}
+button[style*="height: 42px"],button[style*="height: 44px"]:not([aria-label]),button[style*="height: 50px"],a[style*="height: 42px"][style*="white-space: nowrap"],a[style*="height: 46px"][style*="white-space: nowrap"]{height:auto !important;min-height:40px;padding:8px 10px !important;font-size:13.5px !important;white-space:normal !important;text-align:center;line-height:1.25 !important}
+[style*="padding: 48px 44px"],[style*="padding: 44px 40px"]{padding:32px 22px !important}
+[data-principle]{padding:22px 12px !important}
+[data-principles]{gap:12px !important}
+[style*="grid-template-columns: 110px minmax(0px, 1fr)"]{grid-template-columns:76px minmax(0,1fr) !important;gap:14px !important;padding:14px !important}
+a[style*="width: 110px; height: 110px"]{width:76px !important;height:76px !important}
+[data-wa-float]{right:14px !important;bottom:14px !important;height:50px !important;padding:0 13px !important}
+[data-hero-arrow]{display:none !important}
+[data-proj-meta]{justify-content:flex-start !important;text-align:left !important;flex-wrap:wrap !important}
+[data-kt] , [data-kt] *{white-space:normal !important}
+section[style*="padding: 88px 24px"],div[style*="padding: 88px 24px"]{padding:56px 18px !important}
+h1,h2,h3{overflow-wrap:anywhere}
+}
+body[data-stickybar] [data-wa-float]{bottom:84px !important}
 </style>
 <script src="search-index.js"></script>
 </helmet>
@@ -161,7 +190,7 @@ input,textarea,button{font-family:inherit}
 </section>
 <section data-screen-label="Product description" style="max-width:1320px;margin:0 auto;padding:0 24px 72px">
   <div style="border-top:1px solid #e3eaeb;padding-top:40px;display:flex;flex-direction:column;gap:16px">
-    <h2 style="margin:0;font-family:'Poppins',sans-serif;font-size:clamp(22px,2.2vw,28px);font-weight:600;color:#22546f">Product Description</h2>
+    <h2 data-pd-desc="1" style="margin:0;font-family:'Poppins',sans-serif;font-size:clamp(22px,2.2vw,28px);font-weight:600;color:#22546f">Product Description</h2>
     <p style="margin:0;font-size:16px;line-height:1.8;color:#3c4d55;text-wrap:pretty">{{ pd.d1 }}</p>
     <p style="margin:0;font-size:16px;line-height:1.8;color:#3c4d55;text-wrap:pretty">{{ pd.d2 }}</p>
   </div>
@@ -271,6 +300,13 @@ input,textarea,button{font-family:inherit}
   </div>
 </sc-if>
 
+<sc-if value="{{ stickyBar }}" hint-placeholder-val="{{ false }}">
+  <div data-sticky-cta="1" style="position:fixed;left:0;right:0;bottom:0;z-index:80;background:#ffffff;border-top:1px solid #e3eaeb;box-shadow:0 -10px 30px rgba(12,38,51,0.12);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;gap:10px">
+    <button onClick="{{ openEnq }}" style="flex:1;height:48px;border:1px solid #1d989f;background:#ffffff;color:#1d989f;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer">Send Enquiry</button>
+    <sc-if value="{{ pd.notInCart }}" hint-placeholder-val="{{ true }}"><button onClick="{{ pd.onAdd }}" style="flex:1;height:48px;border:1px solid #1d989f;background:#1d989f;color:#ffffff;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer">Add to Cart</button></sc-if>
+    <sc-if value="{{ pd.inCart }}" hint-placeholder-val="{{ false }}"><button onClick="{{ pd.onAdd }}" style="flex:1;height:48px;border:1px solid #1d989f;background:#eef6f7;color:#1d989f;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer">✓ Added to Cart</button></sc-if>
+  </div>
+</sc-if>
 <sc-if value="{{ enqOpen }}" hint-placeholder-val="{{ false }}">
 <div data-screen-label="Enquiry popup" onClick="{{ closeEnqBg }}" style="position:fixed;inset:0;z-index:200;background:rgba(18,38,48,0.55);display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto">
   <div role="dialog" aria-modal="true" aria-label="Send Enquiry" style="position:relative;width:100%;max-width:560px;max-height:calc(100vh - 40px);overflow-y:auto;background:#ffffff;border-radius:12px;box-shadow:0 30px 70px rgba(0,0,0,0.25);font-family:'DM Sans',system-ui,sans-serif">
@@ -351,7 +387,7 @@ Object.keys(REAL).forEach(k => { const [n, c, i] = REAL[k]; Object.assign(ALL[k]
 ['tp1','s16'].forEach(id => { if (ALL[id]) ALL[id].also = [...(ALL[id].also || []), 'Appliance Connection Fittings']; });
 const IMGFIX = {"wa3":"2025/07/AcclivΓao.jpg","wa4":"2025/07/Aqua-FIT┬-Battery-Powered-Faucet.jpg","wa12":"2025/08/smixin_basic.png","wa2":"2025/07/19_x16_-Oval-Undermount-Lavatory.jpg","wa5":"2025/07/Z5617_AL.avif","wa20":"2025/07/Concealed-Hardwired-Automatic-Sensor-Flush-Valve.jpg","wa21":"2025/07/Concealed-WC-flush-valves-COMPACT-II.jpg","wa22":"2025/07/Countertop-Lavatory.jpg","wa31":"2025/07/Hardwired-Automatic-Sensor-Flush-Valve-Closet-with-Integral-Sensor.jpg","wa32":"2025/07/HIGHFLOW-high-speed-hand-dryer.jpg","wa33":"2025/07/Hypereco-single-robe-hook.jpg","wa38":"2025/07/Lift-up-Comfort-shower-seat.jpg","wa40":"2025/07/PREMIX-COMPACT-Thermostatic-mixing-valve.jpg","wa44":"2025/07/Semi-Pedestal-Only-Lavatory.jpg","wa46":"2025/07/Surface-Mounted-Double-Coat-Hook-Cubicle-Collection-Satin-Finish.jpg","wa47":"2025/07/Surface-Mounted-Seat-Cover-Dispenser-Satin-Finish.jpg","wa49":"2025/07/Swing-Up-Grab-Bar-Satin-Finish.jpg","wa51":"2025/07/TEMPOMATIC-MIX-4-electronic-mixer.jpg","wa53":"2025/07/TONIC-JET-shower-head.jpg","wa55":"2025/07/Vive-wall-hung-toilet-bundle-in-White.jpg","wa56":"2025/07/Wall-mounted-304-stainless-steel-bin-25-litres.jpg","wa57":"2025/07/Wall-Mounted-Battery-Powered-Sensor-Faucet.jpg","wa58":"2025/07/WC-operating-panel-MONTUS-KONKAV.jpg","wa13":"2025/08/smixin_light.png","wa14":"2025/08/Mask-group-7.png","wa18":"2025/08/strata.png","wa16":"2025/08/Screenshot-2025-06-18-at-8.32.15.png","wa17":"2025/08/Screenshot-2025-06-18-at-8.21.02.png","wa19":"2025/08/6L3A5094-Modifier-scaled-1-1365x2048-1.jpg","wa36":"2025/07/LadenaΓao.jpg","wa9":"2025/07/BAUEDGE-2-HOLE-BASIN-MIXER.jpg","wa27":"2025/07/32743000_1_1.jpg","wa8":"2025/07/2ΓC│-WITH-MIXING-DEVICE-AND-TEMPERATURE-LIMITER.jpg","wa10":"2025/07/2ΓC│.jpg","wa11":"2025/07/Camaya-Series┬-Sensor-Faucet-with-Gear-driven-Ceramic-Cartridge-Hydropower.jpg","wa29":"2025/07/2ΓC│-S-SIZE.jpg","wa26":"2025/07/ESSENTIALS-MASTER-BATHROOM-ACCESSORIES-SET-5-IN-1.jpg","wa24":"2025/07/Z5665.avif","wa28":"2025/07/EUROSMART-COSMOPOLITAN-PERFECT-SHOWER-SET-WITH-TEMPESTA-210.jpg","wa41":"2025/07/RAPID-SL-3-IN-1-SET-FOR-WC-1.13-M-INSTALLATION-HEIGHT.jpg","wa1":"2025/07/The-Retrofit-Pint┬ΓC¥-0.125-gpf-Concealed-Ultra-Low-Consumption-Urinal-System.jpg","wa54":"2025/07/Urinal-Zurn-One-System-with-0.125-GPF-Top-Mount-Battery-Powered-Sensor-Flush-Valve.jpg","wa6":"2025/07/Basic-drop-down-grab-bar-├y-32mm-L.-850mm.jpg","wa7":"2025/07/png_350506S_1.png","wa50":"2025/07/ZZF_27513001_003_01_1_1.jpg","wa25":"2025/07/EcoVantage┬-HET-Floor-mounted-ADA-Toilet-System-1.jpg","bs1":"2025/09/KB300-00_closed.jpg","bf1":"2025/07/OUTDOOR-FREE-STANDING-BOTTLE-FILLER-NON-REFRIGERATED.jpg","tp7":"2025/09/DAS_3390826_20230809_103018.webp","tp1":"2025/07/Draw-off-valve.jpg","tp2":"2025/07/Electronic-wash-basin-tap-CELIS-E┬▓.jpg","tp3":"2025/07/Exposed-wash-basin-tap-MODUS-E.jpg","tp4":"2025/07/Exposed-wash-basin-tap-PETIT-SC.jpg","tp5":"2025/09/DAS_793464_20200619_125711.webp","tp14":"2025/07/Self-closing-wash-basin-mixer-PETIT-SC.jpg","bf2":"2025/07/OUTDOOR-VANDAL-RESISTANT-BI-LEVEL-DRINKING-FOUNTAIN-WITH-OUTDOOR-MECHANICAL-BOTTLE-FILLER-FILTERED-NON-REFRIGERATED.jpg","tp6":"2025/09/DAS_837471_20191112_170812.webp","tp8":"2025/09/DAS_837436_20200928_144441.webp","tp9":"2025/09/DAS_837432_20200928_144439.webp","tp10":"2025/09/DAS_2209199_20210705_074328.webp","tp11":"2025/09/DAS_4395950_20240830_144851.webp","tp12":"2025/09/DAS_2209200_20210705_074332.webp","tp13":"2025/09/DAS_837435_20191112_170811.webp","bs2":"2025/09/KB310-SSWM_straight_closed.jpg","bs3":"2025/09/KB311-SSRE_straight_closed.jpg","bs4":"2025/09/KB311-SSWM_straight_closed.jpg","wb1":"2025/09/DAS_2671.webp","wb2":"2025/09/DAS_2671760_20220607_101703.webp","wb3":"2025/09/DAS_2671756_20220607_101056.webp","wb4":"2025/09/DAS_2671750_20220607_100130.webp","wb6":"2025/09/DAS_2671731_20220607_092950.webp","wb7":"2025/09/DAS_2671734_20220607_093419.webp","wb5":"2025/09/DAS_2671766_20220607_102240.webp","wb8":"2025/09/sami.webp","wb15":"2025/09/kmt.webp","wb9":"2025/09/kkkp.webp","wb10":"2025/09/DAS_338.webp","wb11":"2025/09/DAS_3387202_20230804_131454.webp","wb12":"2025/09/lim.webp","wb17":"2025/09/DAS_469635_20191112_162513.webp","wb18":"2025/09/DAS_469593_20220609_095017.webp","wb19":"2025/09/DAS_537076_20170925_155349.webp","wa15":"2025/08/Screenshot-2025-06-18-at-8.21.08.png","wb20":"2025/09/mbs.webp","wa23":"2025/07/CuffΓao.jpg","wa30":"2025/09/DAS_545840_20191104_150703.webp","wa34":"2025/07/BOB-B-7125_CA-1-2.jpg","wa35":"2025/07/Jumbo-toilet-paper-dispenser-200m.jpg","wa39":"2025/07/PebbleΓao.jpg","wa45":"2025/07/Dressing-Area-Seat-Ivory-Phenolic-and-Satin-Finish-18_-Wide-1.jpg","wa42":"2025/08/BOB-B-3974_CA.jpg","wa43":"2025/08/bobrick-1-scaled.jpg","wa52":"2025/07/png_749128_1-1.png","w17":"2025/07/png_464000_1.png"};
 Object.keys(IMGFIX).forEach(id => { if (ALL[id]) ALL[id].img = encodeURI('assets/remote/publika/' + IMGFIX[id]); });
-const EXTIMG = {"ct1":"assets/remote/webstaurant/large/116907/2743547.jpg","ct2":"assets/remote/webstaurant/large/116907/2743547.jpg","wa48":"assets/remote/partitionplus/catalog/partitionplus-bobrick-official/round2/b-279-632/01-hero-bob-b-279-ca-900x900.jpg","w5":"assets/remote/unitrade/DAS_1150812_20180912_094838_1561380035_10.jpg","w9":"assets/remote/unitrade/DAS_1150812_20180912_094838_1561380035_10.jpg","w10":"assets/remote/unitrade/DAS_1106316_20180824_132212_1561380045_7.jpg","tt1":"assets/remote/unitrade/UEB%20photos_1540294976_10.jpg","w2":"assets/remote/unitrade/das-386951_1542012757_2.jpg","w3":"assets/remote/unitrade/DAS_334334_20190718_101225_1568730064_9.jpg","wa37":"assets/remote/partitionplus/catalog/partitionplus-bobrick-official/round2/b-167-342/01-hero-bob-b-167-ca-bg-k-900x900.jpg","w8":"assets/remote/geberitconcept/2021/06/smyleSquareWCdaska-1.jpg","w11":"assets/geberit-smyle-seat-rounded.png","ct3":"assets/bobrick-b-43944.png","t5":"assets/bianco-oro.png","t6":"assets/bianco-river.png","t7":"assets/bianco-superiore.png","t16":"assets/carara-classico-superior.png"};
+const EXTIMG = {"ct1":"https://cdnimg.webstaurantstore.com/images/products/large/116907/2743547.jpg","ct2":"https://cdnimg.webstaurantstore.com/images/products/large/116907/2743547.jpg","wa48":"https://partitionplus.com/shop/image/cache/catalog/partitionplus-bobrick-official/round2/b-279-632/01-hero-bob-b-279-ca-900x900.jpg","w5":"https://www.unitrade-bg.com/files/images/products/DAS_1150812_20180912_094838_1561380035_10.jpg","w9":"https://www.unitrade-bg.com/files/images/products/DAS_1150812_20180912_094838_1561380035_10.jpg","w10":"https://www.unitrade-bg.com/files/images/products/DAS_1106316_20180824_132212_1561380045_7.jpg","tt1":"https://www.unitrade-bg.com/files/images/products/UEB%20photos_1540294976_10.jpg","w2":"https://www.unitrade-bg.com/files/images/products/das-386951_1542012757_2.jpg","w3":"https://www.unitrade-bg.com/files/images/products/DAS_334334_20190718_101225_1568730064_9.jpg","wa37":"https://partitionplus.com/shop/image/cache/catalog/partitionplus-bobrick-official/round2/b-167-342/01-hero-bob-b-167-ca-bg-k-900x900.jpg","w8":"https://geberitconcept.store/wp-content/uploads/2021/06/smyleSquareWCdaska-1.jpg","w11":"assets/geberit-smyle-seat-rounded.png","ct3":"assets/bobrick-b-43944.png","t5":"assets/bianco-oro.png","t6":"assets/bianco-river.png","t7":"assets/bianco-superiore.png","t16":"assets/carara-classico-superior.png"};
 Object.keys(EXTIMG).forEach(id => { if (ALL[id]) ALL[id].img = EXTIMG[id]; });
 [["ct1","Recessed Convertible Paper Towel Dispenser B-3944","Combination Towel"],["ct2","Recessed Convertible Paper Towel Dispenser B-3944 (Variant)","Combination Towel"],["ct3","Recessed Paper Towel Dispenser B-43944","Combination Towel"],["es1","Single Jet Shower Kit","Electronic Showers"]].forEach(([id, n, c]) => { ALL[id] = { id, name: n, cat: c, ph: 'product shot', fit: 'contain', img: '' }; });
 ['wa22'].forEach(id => { if (ALL[id]) ALL[id].also = [...(ALL[id].also || []), 'Wash Basin']; });
@@ -411,6 +447,8 @@ class Component extends DCLogic {
   clrRef = React.createRef();
 
   componentDidMount() {
+    this.onStickyScroll = () => { const el = document.querySelector('[data-pd-desc]'); const on = !!el && el.getBoundingClientRect().top < 0 && window.innerWidth < 1040; if (on !== !!this.state.sticky) this.setState({ sticky: on }); if (on) document.body.setAttribute('data-stickybar', '1'); else document.body.removeAttribute('data-stickybar'); };
+    window.addEventListener('scroll', this.onStickyScroll, { passive: true }); window.addEventListener('resize', this.onStickyScroll);
     this.onCardClick = e => { if (e.target.closest('button, a, input, textarea, select')) return; const c = e.target.closest('[data-href]'); if (c && c.dataset.href) window.location.href = c.dataset.href; };
     document.addEventListener('click', this.onCardClick);
     this.onHash = () => { this.setState({ hash: window.location.hash.slice(1), faqOpen: 0 }); window.scrollTo(0, 0); };
@@ -579,6 +617,7 @@ class Component extends DCLogic {
       prodFrp: ['f1','f2','f3','f4','f5','fx1','fx2','fx3'].map(pc),
       showTopBar: this.props.showTopBar ?? true,
       isDesktop: this.state.w >= 1040, isMobile: this.state.w < 1040,
+      stickyBar: !!this.state.sticky && this.state.w < 1040,
       mobileNavOpen: this.state.mobileNav && this.state.w < 1040,
       menuOpen: this.state.menuOpen,
       openMenu: () => this.setState({ menuOpen: true }),
