@@ -111,10 +111,19 @@ const legacyToClean = raw => {
   return null;
 };
 
+// Favicon and home-screen icons (files live in build/icons/).
+const ICONS = [
+  '<link rel="icon" href="favicon.ico" sizes="any">',
+  '<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">',
+  '<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">',
+  '<link rel="apple-touch-icon" href="apple-touch-icon.png">',
+  '<meta name="theme-color" content="#1d989f">'
+].join('\n');
+
 function transformPage(html, page, hash) {
   let out = html;
   // Base URL so every relative asset/script path resolves from the site root.
-  const boot = `<base href="${BASE}">\n<link rel="stylesheet" href="mobile.css">\n<script>window.__PAGE=${JSON.stringify(page)};window.__HASH=${JSON.stringify(hash)};</script>\n<script src="routes.js"></script>`;
+  const boot = `<base href="${BASE}">\n<link rel="stylesheet" href="mobile.css">\n${ICONS}\n<script>window.__PAGE=${JSON.stringify(page)};window.__HASH=${JSON.stringify(hash)};</script>\n<script src="routes.js"></script>`;
   out = out.replace(/<head>/i, '<head>\n' + boot);
   // Route from the clean path instead of location.hash.
   out = out.split('window.location.hash.slice(1)').join("(window.__HASH||'')");
@@ -154,6 +163,7 @@ const copy = (rel) => {
   fs.writeFileSync(path.join(OUT, 'image-slot.js'), src.includes(needle) ? src.replace(needle, "'  -webkit-user-drag:none;user-select:none}' +") : src);
 }
 fs.copyFileSync(path.join(ROOT, 'build', 'mobile.css'), path.join(OUT, 'mobile.css'));
+for (const f of fs.readdirSync(path.join(ROOT, 'build', 'icons'))) fs.copyFileSync(path.join(ROOT, 'build', 'icons', f), path.join(OUT, f));
 for (const f of ['assets', 'support.js', 'image-manifest.json', 'ProductCard.dc.html', '.nojekyll']) {
   if (fs.existsSync(path.join(ROOT, f))) copy(f);
 }
@@ -207,7 +217,7 @@ for (const [clean, { page, hash }] of routes) {
 }
 
 // Old .dc.html URLs redirect to their clean equivalents.
-const redirect = (page) => `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Redirecting…</title>
+const redirect = (page) => `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Redirecting…</title><link rel="icon" href="${BASE}favicon.ico">
 <script>(function(){var B=${JSON.stringify(BASE)},M=${JSON.stringify(linkMap)},p=${JSON.stringify(page + '.dc.html')},h=location.hash;
 var t=M[p+h]!==undefined?M[p+h]:(M[p]!==undefined?M[p]:'');location.replace(B+t);})();</script>
 <link rel="canonical" href="${BASE}${linkMap[page + '.dc.html'] ?? ''}"></head><body><a href="${BASE}${linkMap[page + '.dc.html'] ?? ''}">Continue</a></body></html>`;
@@ -215,7 +225,7 @@ for (const [, page] of STATIC) fs.writeFileSync(path.join(OUT, page + '.dc.html'
 for (const page of ['Category', 'Product']) fs.writeFileSync(path.join(OUT, page + '.dc.html'), redirect(page));
 
 // 404 page sends visitors home.
-fs.writeFileSync(path.join(OUT, '404.html'), `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Page not found</title><meta http-equiv="refresh" content="3; url=${BASE}"></head><body style="font-family:sans-serif;padding:40px">Page not found. <a href="${BASE}">Go to the home page</a>.</body></html>`);
+fs.writeFileSync(path.join(OUT, '404.html'), `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Page not found</title><link rel="icon" href="${BASE}favicon.ico"><meta http-equiv="refresh" content="3; url=${BASE}"></head><body style="font-family:sans-serif;padding:40px">Page not found. <a href="${BASE}">Go to the home page</a>.</body></html>`);
 
 // Sitemap.
 const today = new Date().toISOString().slice(0, 10);
