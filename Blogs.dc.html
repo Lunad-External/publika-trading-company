@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Blogs — Publika Trading Co LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#ffffff;color:#1c2b33;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1d989f;text-decoration:none}
+a:hover{color:#167b81}
+input,textarea,button{font-family:inherit}
+[data-noscroll]::-webkit-scrollbar{display:none}
+
+/* card hover */
+[data-href]:not([style*="grid-area"]),a[href*="Blogs.dc.html#"],a[href*="Projects.dc.html#"]{transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s cubic-bezier(.2,.7,.2,1),border-color .3s !important}
+[data-href]:not([style*="grid-area"]):hover,a[href*="Blogs.dc.html#"]:hover,a[href*="Projects.dc.html#"]:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(28,43,51,.12)}
+[data-href] image-slot,[data-href] img,a[href*="Blogs.dc.html#"] img,a[href*="Projects.dc.html#"] img,a[href*="Blogs.dc.html#"] image-slot,a[href*="Projects.dc.html#"] image-slot{transition:transform .8s cubic-bezier(.2,.7,.2,1) !important}
+[data-href]:hover image-slot,[data-href]:hover img,a[href*="Blogs.dc.html#"]:hover img,a[href*="Projects.dc.html#"]:hover img,a[href*="Blogs.dc.html#"]:hover image-slot,a[href*="Projects.dc.html#"]:hover image-slot{transform:scale(1.07)}
+
+/* whatsapp float */
+[data-wa-float] [data-wa-label]{transition:max-width .45s cubic-bezier(.2,.7,.2,1),opacity .3s ease,margin-left .45s cubic-bezier(.2,.7,.2,1)}
+[data-wa-float]:hover [data-wa-label],[data-wa-float]:focus-visible [data-wa-label]{max-width:140px !important;opacity:1 !important;margin-left:10px !important}
+</style>
+<script src="search-index.js"></script>
+</helmet>
+
+<div style="min-height:100vh;background:#ffffff">
+
+<header style="position:sticky;top:0;z-index:50;background:#ffffff;border-bottom:1px solid #e3eaeb">
+  <div style="position:relative;z-index:60;border-bottom:1px solid #e3eaeb;background:#f4f8f8">
+    <div style="max-width:1320px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:12px">
+      <div style="position:relative;flex:1;min-width:0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5b6b73" stroke-width="2" stroke-linecap="round" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);pointer-events:none"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+        <input type="search" value="{{ sq }}" onChange="{{ sqSet }}" onFocus="{{ sqFocus }}" onBlur="{{ sqBlur }}" onKeyDown="{{ sqKey }}" placeholder="Search products, categories and sub-categories" aria-label="Search products" style="width:100%;box-sizing:border-box;height:44px;padding:0 16px 0 42px;border:1px solid #cfdcde;border-radius:12px;background:#ffffff;font-family:'DM Sans',sans-serif;font-size:15px;color:#1c2b33;outline:none" style-focus="border-color:#1d989f"></input>
+        <sc-if value="{{ sqOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:60;background:#ffffff;border:1px solid #e3eaeb;border-radius:10px;box-shadow:0 24px 50px rgba(28,43,51,0.14);max-height:440px;overflow-y:auto;padding:6px">
+            <sc-for list="{{ sqResults }}" as="r" hint-placeholder-count="0">
+              <a href="{{ r.h }}" onMouseDown="{{ r.go }}" style="display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:6px;color:#1c2b33" style-hover="background:#eef6f7;color:#1c2b33">
+                <span style="position:relative;flex:none;width:40px;height:40px;border-radius:6px;overflow:hidden;background:#eef6f7;display:flex;align-items:center;justify-content:center">
+                  <sc-if value="{{ r.hasImg }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;inset:0;background-color:#ffffff;background-image:url({{ r.i }});background-position:center;background-size:contain;background-repeat:no-repeat"></span></sc-if>
+                  <sc-if value="{{ r.noImg }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d989f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg></sc-if>
+                </span>
+                <span style="display:flex;flex-direction:column;gap:2px;min-width:0">
+                  <span style="font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.l }}</span>
+                  <span style="font-size:12px;color:#5b6b73;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.meta }}</span>
+                </span>
+              </a>
+            </sc-for>
+            <sc-if value="{{ sqNone }}" hint-placeholder-val="{{ false }}"><div style="padding:16px 12px;font-size:14px;color:#5b6b73">No results for "{{ sq }}"</div></sc-if>
+          </div>
+        </sc-if>
+      </div>
+      <button onClick="{{ openDrawer }}" style="flex:none;position:relative;display:flex;align-items:center;gap:10px;height:44px;padding:0 16px;border:1px solid #cfdcde;background:#ffffff;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;color:#1c2b33" style-hover="border-color:#1d989f">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d989f" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>
+        <span>Cart</span>
+        <span style="min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#1d989f;color:#ffffff;font-size:12px;display:flex;align-items:center;justify-content:center">{{ cartCount }}</span>
+      </button>
+    </div>
+  </div>
+  <div style="max-width:1320px;margin:0 auto;padding:0 24px;height:84px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="Home.dc.html" style="display:flex;align-items:center;flex:none"><img src="assets/publika-logo.png" alt="Publika Trading Co LLC" style="height:46px;width:auto;display:block"></a>
+
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+    <nav style="display:flex;align-items:center;gap:4px;height:100%;margin-left:auto;margin-right:-14px">
+      <a href="About%20Us.dc.html" style="padding:10px 14px;font-size:15px;font-weight:500;color:#1c2b33" style-hover="color:#1d989f">About Us</a>
+      <div onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:relative;height:100%;display:flex;align-items:center">
+        <a href="Products.dc.html" style="padding:10px 14px;font-size:15px;font-weight:500;color:#1c2b33;display:flex;align-items:center;gap:6px" style-hover="color:#1d989f">Products <span style="font-size:10px;color:#1d989f">▼</span></a>
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:100%;left:50%;transform:translateX(-50%);width:760px;background:#ffffff;border:1px solid #e3eaeb;border-top:3px solid #1d989f;border-radius:0 0 10px 10px;box-shadow:0 24px 50px rgba(28,43,51,0.12);padding:28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="Category.dc.html#sanitary" style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;color:#22546f;padding-bottom:8px;border-bottom:1px solid #e3eaeb">Sanitary Ware &amp; Fittings</a>
+            <a href="Category.dc.html#sanitary/wcs" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">WCs</a>
+            <a href="Category.dc.html#sanitary/wash-basin" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Wash Basins</a>
+            <a href="Category.dc.html#sanitary/taps" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Taps</a>
+            <a href="Category.dc.html#sanitary" style="margin-top:4px;font-size:14px;font-weight:600;color:#1d989f;display:inline-flex;align-items:center;gap:6px" style-hover="color:#167b81">View more <span>→</span></a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="Category.dc.html#porcelain" style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;color:#22546f;padding-bottom:8px;border-bottom:1px solid #e3eaeb">Porcelain &amp; Mosaic</a>
+            <a href="Category.dc.html#porcelain/quartz-tiles" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Quartz Tiles</a>
+            <a href="Category.dc.html#porcelain/porcelain-tiles" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Porcelain Tiles</a>
+            <a href="Category.dc.html#porcelain/ceramic-tiles" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Ceramic Tiles</a>
+            <a href="Category.dc.html#porcelain" style="margin-top:4px;font-size:14px;font-weight:600;color:#1d989f;display:inline-flex;align-items:center;gap:6px" style-hover="color:#167b81">View more <span>→</span></a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="Category.dc.html#frp" style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;color:#22546f;padding-bottom:8px;border-bottom:1px solid #e3eaeb">FRP Panels</a>
+            <a href="Category.dc.html#frp/wall-panels" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Wall Panels</a>
+            <a href="Category.dc.html#frp/ceiling-panels" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Ceiling Panels</a>
+            <a href="Category.dc.html#frp/food-grade-sheets" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Food-Grade Sheets</a>
+            <a href="Category.dc.html#frp" style="margin-top:4px;font-size:14px;font-weight:600;color:#1d989f;display:inline-flex;align-items:center;gap:6px" style-hover="color:#167b81">View more <span>→</span></a>
+          </div>
+        </div>
+        </sc-if>
+      </div>
+      <a href="Projects.dc.html" style="padding:10px 14px;font-size:15px;font-weight:500;color:#1c2b33" style-hover="color:#1d989f">Projects</a>
+      <a href="Company%20Profile.dc.html" style="padding:10px 14px;font-size:15px;font-weight:500;color:#1c2b33" style-hover="color:#1d989f">Company Profile</a>
+      <a href="#" style="padding:10px 14px;font-size:15px;font-weight:500;color:#1c2b33" style-hover="color:#1d989f">Blogs</a>
+      <a href="Contact%20Us.dc.html" style="padding:10px 14px;font-size:15px;font-weight:500;color:#1c2b33" style-hover="color:#1d989f">Contact Us</a>
+    </nav>
+    </sc-if>
+
+    <div style="display:contents">
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMobileNav }}" style="width:44px;height:44px;border:1px solid #e3eaeb;background:#ffffff;border-radius:6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px">
+          <span style="width:18px;height:2px;background:#22546f"></span><span style="width:18px;height:2px;background:#22546f"></span><span style="width:18px;height:2px;background:#22546f"></span>
+        </button>
+      </sc-if>
+    </div>
+  </div>
+  <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="border-top:1px solid #e3eaeb;padding:8px 24px 18px;display:flex;flex-direction:column">
+      <a href="About%20Us.dc.html" onClick="{{ closeMobileNav }}" style="padding:12px 0;border-bottom:1px solid #eef2f3;color:#1c2b33;font-weight:500">About Us</a>
+      <a href="Products.dc.html" onClick="{{ closeMobileNav }}" style="padding:12px 0;border-bottom:1px solid #eef2f3;color:#1c2b33;font-weight:500">Products</a>
+      <a href="Category.dc.html#sanitary" onClick="{{ closeMobileNav }}" style="padding:10px 0 10px 16px;border-bottom:1px solid #eef2f3;color:#5b6b73;font-size:14px">Sanitary Ware &amp; Fittings</a>
+      <a href="Category.dc.html#porcelain" onClick="{{ closeMobileNav }}" style="padding:10px 0 10px 16px;border-bottom:1px solid #eef2f3;color:#5b6b73;font-size:14px">Porcelain &amp; Mosaic</a>
+      <a href="Category.dc.html#frp" onClick="{{ closeMobileNav }}" style="padding:10px 0 10px 16px;border-bottom:1px solid #eef2f3;color:#5b6b73;font-size:14px">FRP Panels</a>
+      <a href="Projects.dc.html" onClick="{{ closeMobileNav }}" style="padding:12px 0;border-bottom:1px solid #eef2f3;color:#1c2b33;font-weight:500">Projects</a>
+      <a href="Company%20Profile.dc.html" onClick="{{ closeMobileNav }}" style="padding:12px 0;border-bottom:1px solid #eef2f3;color:#1c2b33;font-weight:500">Company Profile</a>
+      <a href="#" onClick="{{ closeMobileNav }}" style="padding:12px 0;border-bottom:1px solid #eef2f3;color:#1c2b33;font-weight:500">Blogs</a>
+      <a href="Contact%20Us.dc.html" onClick="{{ closeMobileNav }}" style="padding:12px 0;color:#1c2b33;font-weight:500">Contact Us</a>
+    </nav>
+  </sc-if>
+</header>
+
+<sc-if value="{{ isList }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Blogs hero" style="position:relative;height:clamp(280px,32vw,380px);overflow:hidden;background:#0f2e3d">
+  <image-slot id="blogs-hero" shape="rect" src="assets/remote/publika/2026/03/bathroom-renovations-kochi.jpg" placeholder="Blogs banner"></image-slot>
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,38,51,0.85) 0%,rgba(12,38,51,0.5) 60%,rgba(12,38,51,0.25) 100%);pointer-events:none"></div>
+  <div style="position:absolute;inset:0;display:flex;align-items:center;pointer-events:none">
+    <div style="max-width:1320px;width:100%;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:8px;font-size:14px;color:#cfe3e8;pointer-events:auto"><a href="Home.dc.html" style="color:#7fd6db">Home</a><span>/</span><span>Blogs</span></div>
+      <h1 style="margin:0;font-family:'Poppins',sans-serif;font-weight:600;font-size:clamp(36px,5vw,60px);line-height:1.1;color:#ffffff">Our Blog</h1>
+      <p style="margin:0;max-width:600px;font-size:clamp(16px,1.4vw,19px);line-height:1.6;color:#e8f1f2">Expert guides on bathroom renovation, sanitary ware and tiles in Dubai.</p>
+    </div>
+  </div>
+</section>
+<section data-screen-label="Blog grid" style="max-width:1320px;margin:0 auto;padding:72px 24px 96px">
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px">
+    <sc-for list="{{ blogList }}" as="b" hint-placeholder-count="4">
+      <article style="display:flex;flex-direction:column;background:#ffffff;border:1px solid #e3eaeb;border-radius:14px;overflow:hidden;transition:box-shadow .25s, border-color .25s" style-hover="border-color:#1d989f;box-shadow:0 16px 36px rgba(29,152,159,0.12)">
+        <a href="{{ b.href }}" style="position:relative;display:block;aspect-ratio:16 / 9;background:#eef6f7;overflow:hidden"><div style="position:absolute;inset:0;transition:transform .6s ease" style-hover="transform:scale(1.05)"><image-slot id="blog-{{ b.slug }}" shape="rect" src="{{ b.img }}" placeholder="Blog featured image"></image-slot></div></a>
+        <div style="padding:28px 30px 32px;display:flex;flex-direction:column;gap:14px;flex:1">
+          <div style="font-size:13px;font-weight:600;color:#1d989f">{{ b.date }}</div>
+          <h2 style="margin:0;font-family:'Poppins',sans-serif;font-size:clamp(19px,1.7vw,23px);font-weight:600;line-height:1.35;color:#22546f;text-wrap:pretty">{{ b.title }}</h2>
+          <p style="margin:0;font-size:15px;line-height:1.7;color:#5b6b73;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">{{ b.excerpt }}</p>
+          <a href="{{ b.href }}" style="align-self:flex-start;display:inline-flex;align-items:center;height:46px;padding:0 24px;background:#1d989f;color:#ffffff;border-radius:6px;font-weight:600;font-size:14px;margin-top:4px" style-hover="background:#167b81;color:#ffffff">Read More</a>
+        </div>
+      </article>
+    </sc-for>
+  </div>
+</section>
+</sc-if>
+
+<sc-for list="{{ blogDetails }}" as="d" hint-placeholder-count="0">
+<sc-if value="{{ d.active }}" hint-placeholder-val="{{ false }}">
+<section data-screen-label="Blog image" style="position:relative;height:clamp(320px,46vw,580px);overflow:hidden;background:#eef6f7">
+  <image-slot id="blog-{{ d.slug }}" shape="rect" src="{{ d.img }}" placeholder="Blog image"></image-slot>
+</section>
+<section data-screen-label="Blog title" style="max-width:1320px;margin:0 auto;padding:44px 24px 8px;display:flex;flex-direction:column;gap:16px">
+  <div style="display:flex;gap:8px;font-size:14px;color:#5b6b73;flex-wrap:wrap"><a href="Home.dc.html">Home</a><span>/</span><a href="#">Blogs</a><span>/</span><span>{{ d.date }}</span></div>
+  <h1 style="margin:0;max-width:980px;font-family:'Poppins',sans-serif;font-size:clamp(28px,3.6vw,46px);font-weight:600;line-height:1.2;color:#22546f;text-wrap:balance">{{ d.title }}</h1>
+</section>
+<section data-screen-label="Blog content" style="max-width:1320px;margin:0 auto;padding:32px 24px 96px">
+  <div style="display:grid;grid-template-columns:minmax(0,7fr) minmax(0,3fr);gap:56px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <sc-for list="{{ d.blocks }}" as="k" hint-placeholder-count="6">
+        <sc-if value="{{ k.isH }}" hint-placeholder-val="{{ false }}"><h2 style="margin:18px 0 0;font-family:'Poppins',sans-serif;font-size:clamp(21px,2vw,26px);font-weight:600;line-height:1.3;color:#22546f">{{ k.text }}</h2></sc-if>
+        <sc-if value="{{ k.isP }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:17px;line-height:1.8;color:#3c4d55;text-wrap:pretty">{{ k.text }}</p></sc-if>
+        <sc-if value="{{ k.isLi }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:14px;align-items:flex-start;padding-left:4px"><span style="width:8px;height:8px;margin-top:10px;background:#1d989f;transform:rotate(45deg);flex:none"></span><p style="margin:0;font-size:17px;line-height:1.75;color:#3c4d55"><strong style="color:#22546f">{{ k.label }}</strong> {{ k.text }}</p></div></sc-if>
+      </sc-for>
+      <a href="#" style="align-self:flex-start;margin-top:20px;font-size:15px;font-weight:600;color:#1d989f">← Back to all blogs</a>
+    </div>
+    <aside style="position:sticky;top:110px;background:#f4f8f8;border:1px solid #e3eaeb;border-radius:14px;padding:28px 26px;display:flex;flex-direction:column;gap:16px">
+      <h3 style="margin:0 0 4px;font-family:'Poppins',sans-serif;font-size:20px;font-weight:600;color:#22546f">Key Takeaways</h3>
+      <sc-for list="{{ d.keys }}" as="kt" hint-placeholder-count="8">
+        <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:22px;height:22px;border-radius:50%;background:#1d989f;color:#ffffff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px">✓</span><span style="font-size:15px;line-height:1.55;color:#1c2b33">{{ kt }}</span></div>
+      </sc-for>
+    </aside>
+  </div>
+</section>
+</sc-if>
+</sc-for>
+
+<footer style="background:#f4f8f8;border-top:1px solid #e3eaeb">
+  <div style="max-width:1320px;margin:0 auto;padding:64px 24px 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px">
+    <div style="display:flex;flex-direction:column;gap:18px;grid-column:span 1">
+      <img src="assets/publika-logo.png" alt="Publika Trading Co LLC" style="height:44px;width:auto;align-self:flex-start">
+      <p style="margin:0;font-size:14px;line-height:1.7;color:#5b6b73">Publika Building &amp; Construction Materials Trading Co. LLC is a privately-owned business offering a one-stop solution for architects, interior designers, developers, retailers, and private clients.</p>
+      <div style="display:flex;gap:10px">
+        <a href="https://www.facebook.com/share/1BFs4fwjBi/?mibextid=wwXIfr" style="height:36px;padding:0 14px;display:flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:13px;color:#22546f" style-hover="background:#1d989f;color:#ffffff;border-color:#1d989f">Facebook</a>
+        <a href="https://www.instagram.com/publikatradingco?igsh=dWZvN2xkejN1YXI4" style="height:36px;padding:0 14px;display:flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:13px;color:#22546f" style-hover="background:#1d989f;color:#ffffff;border-color:#1d989f">Instagram</a>
+        <a href="https://www.linkedin.com/company/publika-trading-co/" style="height:36px;padding:0 14px;display:flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:13px;color:#22546f" style-hover="background:#1d989f;color:#ffffff;border-color:#1d989f">LinkedIn</a>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:600;color:#22546f;margin-bottom:6px">Main Menu</div>
+      <a href="About%20Us.dc.html" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">About Us</a>
+      <a href="Projects.dc.html" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Projects</a>
+      <a href="Company%20Profile.dc.html" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Company Profile</a>
+      <a href="#" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Blogs</a>
+      <a href="Contact%20Us.dc.html" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Contact Us</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:600;color:#22546f;margin-bottom:6px">Our Products</div>
+      <a href="Category.dc.html#sanitary" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Sanitary Ware &amp; Fittings</a>
+      <a href="Category.dc.html#porcelain" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Porcelain &amp; Mosaic</a>
+      <a href="Category.dc.html#frp" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">FRP Panels</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:600;color:#22546f;margin-bottom:6px">Contact Us</div>
+      <a href="tel:+97143353724" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">+971 4 335 3724</a>
+      <a href="https://wa.me/971529104923" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">WhatsApp: +971 52 910 4923</a>
+      <a href="mailto:info@publika.ae" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">info@publika.ae</a>
+      <div style="font-size:14px;line-height:1.6;color:#5b6b73">Warehouse Number 37, Span Precast, DIP2, Dubai, UAE, PO Box No: 26344</div>
+    </div>
+  </div>
+  <div style="background:#1d989f;color:#ffffff">
+    <div style="max-width:1320px;margin:0 auto;padding:16px 24px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px">
+      <div>© 2026 Publika Building &amp; Construction Materials Trading Co. LLC. All rights reserved.</div>
+      <div>Dubai, United Arab Emirates</div>
+    </div>
+  </div>
+</footer>
+
+<sc-if value="{{ drawerOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeDrawer }}" style="position:fixed;inset:0;background:rgba(12,38,51,0.45);z-index:90"></div>
+  <aside style="position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:#ffffff;z-index:91;display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(12,38,51,0.18)">
+    <div style="height:76px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e3eaeb">
+      <div style="font-family:'Poppins',sans-serif;font-size:19px;font-weight:600;color:#22546f">Enquiry List ({{ cartCount }})</div>
+      <button onClick="{{ closeDrawer }}" aria-label="Close" style="width:40px;height:40px;border:1px solid #e3eaeb;background:#ffffff;border-radius:6px;font-size:20px;color:#1c2b33;cursor:pointer">×</button>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:8px 24px">
+      <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:48px 0;text-align:center;color:#5b6b73;font-size:15px;line-height:1.6">Your enquiry list is empty.<br>Add products to request a quotation.</div>
+      </sc-if>
+      <sc-for list="{{ cartItems }}" as="it" hint-placeholder-count="0">
+        <div style="display:flex;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid #eef2f3">
+          <div style="width:56px;height:56px;border-radius:6px;background:#f3f7f7;flex:none;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,monospace;font-size:10px;color:#8a989e">IMG</div>
+          <div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1d989f">{{ it.cat }}</div><div style="font-size:15px;font-weight:500;color:#1c2b33">{{ it.name }}</div></div>
+          <button onClick="{{ it.onAdd }}" style="border:0;background:transparent;color:#5b6b73;font-size:13px;text-decoration:underline;cursor:pointer">Remove</button>
+        </div>
+      </sc-for>
+    </div>
+    <div style="padding:20px 24px;border-top:1px solid #e3eaeb;display:flex;flex-direction:column;gap:10px">
+      <button onClick="{{ requestQuote }}" style="height:50px;border:0;background:#1d989f;color:#ffffff;border-radius:6px;font-size:15px;font-weight:600;cursor:pointer" style-hover="background:#167b81">View Enquiry Cart</button>
+      <div style="font-size:12px;color:#5b6b73;text-align:center">No payment required. Our team will contact you with pricing.</div>
+    </div>
+  </aside>
+</sc-if>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:95;background:#22546f;color:#ffffff;padding:14px 22px;border-radius:8px;font-size:14px;box-shadow:0 12px 30px rgba(12,38,51,0.25);display:flex;gap:16px;align-items:center">
+    <span>{{ toast }}</span>
+    <button onClick="{{ openDrawer }}" style="border:0;background:transparent;color:#7fd6db;font-weight:700;font-size:14px;cursor:pointer;padding:0">View list</button>
+  </div>
+</sc-if>
+
+
+<a href="https://wa.me/971529104923?text=Hi%20Publika%2C%20I%20have%20an%20enquiry" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp" data-wa-float="1" style="position:fixed;right:24px;bottom:24px;z-index:80;display:flex;align-items:center;height:56px;padding:0 15px;border-radius:28px;overflow:hidden;background:#25D366;color:#ffffff;font-family:'DM Sans',system-ui,sans-serif;font-size:15px;font-weight:600;box-shadow:0 12px 30px rgba(18,140,126,0.35);transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s" style-hover="transform:translateY(-3px);box-shadow:0 16px 36px rgba(18,140,126,0.45);color:#ffffff">
+  <svg width="26" height="26" viewBox="0 0 32 32" fill="#ffffff" aria-hidden="true"><path d="M16.04 3C9.06 3 3.4 8.66 3.4 15.64c0 2.23.58 4.4 1.69 6.32L3.3 28.7l6.93-1.82a12.6 12.6 0 0 0 5.8 1.42h.01c6.98 0 12.64-5.66 12.64-12.64S23.02 3 16.04 3zm0 23.15h-.01a10.5 10.5 0 0 1-5.35-1.47l-.38-.23-4.11 1.08 1.1-4.01-.25-.41a10.46 10.46 0 0 1-1.6-5.57c0-5.8 4.72-10.52 10.53-10.52 2.81 0 5.45 1.1 7.44 3.08a10.45 10.45 0 0 1 3.08 7.45c0 5.8-4.72 10.52-10.45 10.52zm5.77-7.88c-.32-.16-1.87-.92-2.16-1.03-.29-.11-.5-.16-.71.16-.21.32-.82 1.03-1 1.24-.18.21-.37.24-.69.08-.32-.16-1.33-.49-2.54-1.57-.94-.84-1.57-1.87-1.75-2.19-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.55.16-.18.21-.32.32-.53.11-.21.05-.4-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.4-.29.32-1.1 1.08-1.1 2.63s1.13 3.05 1.29 3.26c.16.21 2.22 3.39 5.38 4.75.75.32 1.34.52 1.8.66.76.24 1.44.21 1.99.13.61-.09 1.87-.76 2.13-1.5.26-.74.26-1.37.18-1.5-.08-.13-.29-.21-.61-.37z"></path></svg>
+  <span data-wa-label="1" style="display:inline-block;max-width:0;opacity:0;margin-left:0;white-space:nowrap;overflow:hidden">Chat with us</span>
+</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;slideSeconds&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:4,&quot;min&quot;:3,&quot;max&quot;:8,&quot;step&quot;:0.5,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero slider&quot;},&quot;zoom&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.12,&quot;min&quot;:0,&quot;max&quot;:0.25,&quot;step&quot;:0.01,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero slider&quot;},&quot;showTopBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Header&quot;}}">
+const P = (id, name, cat, ph) => ({ id, name, cat, ph: ph || 'product shot', fit: ph === 'tile swatch' ? 'cover' : 'contain', img: '' });
+const SAN = [
+  P('s1','Wall-hung S21 S WC Pan','WCs'), P('s2','Countertop Wash Basin','Wash Basin'), P('s3','Electronic Sensor Basin Tap','Taps'),
+  P('s4','TEMPOMIX 3 Time Flow Mixer','Mixers'), P('s5','Automatic Soap Dispenser','Soap Dispenser'), P('s6','High-Speed Hand Dryer','Hand Dryers'),
+  P('s7','Stainless Steel Grab Bar','Grab Bars'), P('s8','Horizontal Baby Changing Station','Baby Station'), P('s9','Jumbo Roll Tissue Dispenser','Toilet Tissue Dispensers'),
+  P('s10','Recessed Mirror Cabinet','Mirror Cabinets'), P('s11','Concealed Flush Valve','Flush Valve'), P('s12','Bottle Filler Station','Bottle Fillers'),
+  P('s13','Lift-up Comfort Shower Seat','Shower Seats'), P('s14','Electronic Shower Control','Electronic Showers'), P('s15','Combination Towel Dispenser & Waste','Combination Towel'),
+  P('s16','WC Module MONTUS','Flush Valve'), P('s17','Wall-Mounted Urinal','Urinals'), P('s18','Freestanding Bathtub','Shower & Tub'), P('s20','Geberit Selnova Comfort Wall-hung WC','WCs')
+];
+const TILE = ['Alluring','Bianco Cristallo','Bianco Gioa','Bianco Ibiza','Bianco Oro','Bianco River','Bianco Superiore','Bianco Venatino','Black Canvas Slab','Calacatta Elegante','Calacatta Gold Mist','Calacatta Imperiale','Calacatta Nero','Calacatta Pristine','Calacatta Rivolo','Carara Classico Superior']
+  .map((n, i) => P('t' + (i + 1), n, 'Quartz Tiles', 'tile swatch'));
+const FRP = [P('f1','Food-Grade Glossy FRP Sheet','FRP Panels'), P('f2','Embossed FRP Wall Panel','FRP Panels'), P('f3','Smooth White FRP Panel','FRP Panels'), P('f4','FRP Ceiling Panel','FRP Panels'), P('f5','Fire-Retardant FRP Panel','FRP Panels')];
+const ALL = {}; [...SAN, ...TILE, ...FRP].forEach(p => ALL[p.id] = p);
+const IMG = {
+  s1: '2025/07/Wall-hung-S21-S-WC-pan.jpg', s4: '2025/07/TEMPOMIX-3-time-flow-mixer-1.jpg', s13: '2025/07/Lift-up-Comfort-shower-seat.jpg',
+  s16: '2025/07/WC-module-MONTUS-1-1.jpg', s20: '2025/09/DAS_1540703_20191111.webp',
+  t1: '2025/09/Alluring.jpg', t13: '2025/09/CALACATTA-NERO-scaled-1.jpg', t15: '2025/09/Calacatta-Rivolo-Full-Slab-View-1-scaled-1.jpg',
+  f1: '2025/01/decopan-food-glossy-grp-sheet-laminate-5941.jpg'
+};
+Object.keys(IMG).forEach(k => ALL[k].img = 'assets/remote/publika/' + IMG[k]);
+const LISTS = {
+  featured: ['s1','t15','s20','t13','s16','f1','s4','t1'],
+  clearance: ['s3','s5','t2','s7','t3','s8','t4','s9','t5','s10','s11','t6','s12','t7','s13'],
+  sanitary: ['s14','s15','s6','s17','s18','s2'],
+  porcelain: ['t8','t9','t12','t10','t14','t11'],
+  frp: ['f2','f3','f4','f5']
+};
+const U = 'assets/remote/publika/';
+const SLIDES = [
+  { img: U + '2023/02/Slider-1-scaled.jpg', eyebrow: 'Publika Trading Co LLC', title: 'Delivering sustainable value & quality in building trust', text: 'A privately-owned family business specializing in offering a one-stop solution for architects.' },
+  { img: U + '2023/01/Slider-2-scaled.jpg', eyebrow: '15 years of experience', title: 'Creating a design-led extravagance', text: 'An efficient model that provides lasting, sustainable, high-quality products and services.' },
+  { img: U + '2023/01/Slider-3.jpg', eyebrow: 'International standards', title: 'Quality that redefines the look', text: 'From product compatibility testing to premium after-quality service, we provide products and services that comply with international standards.' },
+  { img: U + '2023/01/Slider-4.jpg', eyebrow: 'LEED-certified', title: 'Functional fittings & accessories for a perfect fit!', text: 'LEED-certified products with exceptional quality and lasting services for years to come.' }
+];
+const CLIENTS = ['2025/02/1-1024x200.webp','2025/02/2.png','2025/02/3.png','2025/02/4-e1740578089129.png','2025/02/5-e1740577359512.png','2025/02/6.png','2025/02/7.png','2025/02/8.png','2025/02/9.png','2025/02/10.png','2025/02/11-1024x683.png','2025/02/12.png','2025/02/13.png','2025/02/14.jpg','2025/02/15.png','2025/02/16-1024x683.png','2025/02/17-1024x303.png','2025/02/18.jpg','2025/02/bk-logo.png','2025/02/domino-logo.0eae8ba75d52baeba5a81.png'].map(s => U + s);
+const BLOGS = [
+  { tag: 'Bathroom Accessories', title: 'Elevate Your Space: The Best Bathroom Accessories and Renovation in Dubai', img: U + '2026/03/4-1024x596.png', url: 'https://publika.ae/blog/elevate-your-space-the-best-bathroom-accessories-and-renovation-in-dubai/', excerpt: 'Your bathroom is more than just a room; it is a private retreat where you start and end your day. We provide high-quality products that redefine the look of your home.' },
+  { tag: 'Porcelain Tiles', title: 'Transform Your Home with Premium Porcelain Tiles and Professional Renovation in Dubai', img: U + '2026/03/3-1024x596.png', url: 'https://publika.ae/blog/transform-your-home-with-premium-porcelain-tiles-and-professional-renovation-in-dubai/', excerpt: 'Choosing the right flooring is a big step in making your home look beautiful. Porcelain tiles are a top choice because they are strong and look very elegant.' },
+  { tag: 'Sanitary Ware', title: 'The Ultimate Guide to Premium Sanitary Ware and Bathroom Renovation in Dubai', img: U + '2026/03/2-1024x596.png', url: 'https://publika.ae/blog/the-ultimate-guide-to-premium-sanitary-ware-and-bathroom-renovation-in-dubai/', excerpt: 'A beautiful bathroom makes your home feel like a luxury hotel. Choosing the right fixtures is the most important step for a perfect home.' }
+];
+const PROJECTS = [
+  { tag: 'Latest Project', title: 'Commercial Washroom Fit-out', img: U + 'elementor/thumbs/IMG_3915-scaled-rnvdy1xslci8xxc8zj4a4olehs0gqtknp7jmtg6j98.jpg', url: 'Projects.dc.html#commercial-washroom-fit-out' },
+  { tag: 'Latest Project', title: 'Washroom Fixtures & Accessories Installation', img: U + 'elementor/thumbs/IMG_334-rnvdy1xslci8xxc8zj4a4olehs0gqtknp7jmtg6j98.jpg', url: 'Projects.dc.html#washroom-fixtures-installation' },
+  { tag: 'Latest Project', title: 'Public Washroom Accessories Package', img: U + 'elementor/thumbs/B-165_B-3944_B-823_productLS-v5-rnvdy1xslci8xxc8zj4a4olehs0gqtknp7jmtg6j98.jpg', url: 'Projects.dc.html#public-washroom-accessories-package' }
+];
+const DESC = {
+  s1: 'The Delabie S21 S wall-hung WC pan, available from Publika in Dubai, is made from 1.5 mm bacteriostatic 304 stainless steel with a seam-free, one-piece pressed bowl for better hygiene. Water-saving from 4 L per flush and compatible with standard frame systems, it is built for public, commercial and high-traffic washrooms across the UAE.',
+  t15: 'Calacatta Rivolo quartz features flowing gold and grey veins across a bright white base for a luxurious marble effect. Durable and easy to maintain, it suits kitchen countertops, bathroom vanities, floors and statement walls in modern homes and hospitality projects across Dubai and the UAE.',
+  s20: 'The Geberit Selnova Comfort wall-hung WC brings Swiss sanitary engineering to bathrooms in Dubai. Its raised comfort height makes sitting down and standing up easier, and the wall-hung design keeps floors clear for quick cleaning in homes, hotels, healthcare and commercial washrooms.',
+  t13: 'Calacatta Nero quartz pairs a deep black base with bold white veining for a dramatic, high-end look. Ideal for feature walls, kitchen islands and vanity tops, it gives residential and commercial interiors in Dubai a distinctive statement surface.',
+  s16: 'The Schell MONTUS WC module is a self-supporting frame with a 12 cm concealed cistern for wall-mounted WCs. Dual flush with a 3 L eco volume and adjustable main flush helps cut water use, making it a reliable choice for stud-wall and pre-wall installations in UAE construction projects.',
+  f1: 'Food-grade glossy FRP sheets from Publika provide a seamless, hygienic wall finish for commercial kitchens, food-processing units, cold rooms and hospitals in Dubai. Moisture resistant and easy to wash down, they help meet strict UAE food safety and hygiene standards.',
+  s4: 'The Delabie TEMPOMIX 3 is a wall-mounted, soft-touch time flow basin mixer with a chrome-plated solid brass body. Pre-set to around 7 seconds and 3 L per minute, it delivers up to 85% water savings, ideal for public washrooms, schools, malls and offices in Dubai.',
+  t1: 'Alluring quartz combines a striking natural pattern with the strength of engineered stone. Non-porous and low maintenance, it is a stylish, durable choice for kitchen worktops, bathroom vanities and interior walls in residential and commercial spaces across Dubai and the UAE.'
+};
+const SPECS = {
+  s1: [['Shield','Material','304 stainless steel, 1.5 mm'],['Drop','Water saving','Works from 4 L flush'],['Check','Warranty','30 years']],
+  t15: [['Shield','Surface','Engineered quartz'],['Ruler','Format','Full slab'],['Check','Look','Gold & grey veining']],
+  s20: [['Check','Brand','Geberit'],['Ruler','Height','Comfort height'],['Shield','Mounting','Wall-hung']],
+  t13: [['Shield','Surface','Engineered quartz'],['Ruler','Format','Full slab'],['Check','Look','Black with white veins']],
+  s16: [['Ruler','Size','W 50 x H 115 cm'],['Drop','Dual flush','3 L eco / 4–7 L main'],['Shield','Load capacity','Up to 400 kg']],
+  f1: [['Check','Hygiene','Food-grade surface'],['Drop','Moisture','Water resistant'],['Shield','Durability','Impact resistant']],
+  s4: [['Drop','Water saving','Up to 85%'],['Bolt','Operation','Soft-touch, ~7 s flow'],['Shield','Warranty','30 years']],
+  t1: [['Shield','Surface','Engineered quartz'],['Ruler','Format','Full slab'],['Leaf','Use','Floors, walls & counters']]
+};
+const BLOGS_ALL = [{"slug":"elevate-your-space","date":"25 Feb 2026","img":"assets/remote/publika/2026/03/4.png","title":"Elevate Your Space: The Best Bathroom Accessories and Renovation in Dubai","body":"Your bathroom is more than just a room; it is a private retreat where you start and end your day. At Publika Building & Construction Materials Trading Co.LLC, we help you make this space perfect. We provide high-quality products that redefine the look of your home.\n## Professional Dubai Bathroom Renovation Services\nRenovating a bathroom is a great way to improve your quality of life and your property value. We offer the best Dubai bathroom renovation services for both villas and apartments. Our team understands that a successful project requires correct plumbing, waterproofing, and style.\nAs one of the leading bathroom renovation companies in Dubai, we offer a “one-stop solution”. This means we handle everything from the initial design to the final finishing touches. We focus on five main goals: durability, aesthetics, sustainability, efficiency, and the customer.\n## Premium Sanitary Ware and Fittings\nPublika is recognized among the top sanitary ware suppliers in Dubai for residential projects. We provide elegant wash basins, water closets, and bidets that meet international standards. Our products are selected for their water-saving functions and smooth, luxury finishes.\nIf you are looking for a sanitary fittings supplier Dubai, we offer a wide range of modern options. Our collection includes shower sets, mixers, and valves that are built to last in the UAE climate. We perform strict compatibility testing on all products to ensure they fit your home perfectly.\n## High-Quality Porcelain and Ceramic Tiles\nThe right flooring is the foundation of a beautiful bathroom design. We are proud porcelain tiles suppliers in Dubai, offering stunning porcelain and mosaic collections. These tiles are strong, resist moisture, and handle temperature changes very well.\nWe also serve as expert ceramic tile suppliers in UAE for all types of building projects. By working with top tiles manufacturing companies in UAE, we provide many sizes and effects. You can choose from marble-looks, stone-effects, or decorative slabs to match your vision.\n## Modern Toilets and Accessories\nChoosing between wall-hung and floor-mounted toilets is a big part of any renovation. Wall-hung models save floor space and look very modern, while floor-mounted types are classic. If you are checking the wc toilet price in UAE, we offer premium products at competitive rates.\nTo finish your dream space, you may want to look for bathroom accessories UAE online. Our range includes soap dispensers, towel holders, robe hooks, and stylish mirrors. These small details help create a cohesive design theme that makes your bathroom feel like a spa.\n## Why Choose Publika?\n- Sustainability: We offer LEED-certified products that help the environment.\n- Quality: Every product is checked by our quality assurance department.\n- Service: We support our clients from product selection to after-quality service.\n- Location: Visit our warehouse in DIP2, Dubai, to see our full collection.\nWe believe in delivering sustainable value and building long-term trust with our clients. Our team is ready to help you transform your bathroom into a beautiful and functional space. Contact Publika today via WhatsApp or email to start your home renovation journey.","keys":["A bathroom renovation improves both quality of life and property value.","Publika renovates villas and apartments as a one-stop solution, from design to finishing.","Successful projects need correct plumbing, waterproofing and style.","Sanitary ware is chosen for water-saving functions and luxury finishes.","All fittings go through strict compatibility testing for the UAE climate.","Porcelain and mosaic tiles resist moisture and handle temperature changes.","Wall-hung toilets save floor space; floor-mounted models offer a classic look.","LEED-certified products and quality assurance on every item."]},{"slug":"premium-porcelain-tiles","date":"18 Feb 2026","img":"assets/remote/publika/2026/03/3.png","title":"Transform Your Home with Premium Porcelain Tiles and Professional Renovation in Dubai","body":"Choosing the right flooring is a big step in making your home look beautiful. Porcelain tiles are a top choice because they are strong and look very elegant. Publika Building & Construction Materials Trading Co.LLC helps you find the best tiles for your space.\nWe are proud porcelain tiles suppliers in Dubai with 15 years of industry experience. Our team understands the UAE construction industry and what modern homeowners need. We provide high-quality products that redefine the look of any room in your villa or apartment.\n## Why Porcelain Tiles are Perfect for Your Home\nPorcelain tiles are great for the local climate because they handle moisture very well. They last for many years and are very easy to keep clean in a busy house. As leading ceramic tile suppliers in UAE, we offer many styles and unique textures.\nWe work with the best tiles manufacturing companies in UAE to give you more variety. Whether you want a modern look or something classic, we have the right slab for you. Our porcelain collection is chosen for its durability and high aesthetic value.\n## Top Dubai Bathroom Renovation Services\nAre you planning to update your old bathroom into a luxury private retreat? Publika offers professional Dubai bathroom renovation services for residential projects. We provide a “one-stop solution” for architects, interior designers, and private homeowners.\nThere are many bathroom renovation companies in Dubai, but we stand out by focusing on quality. Our team handles product compatibility testing to ensure everything works together perfectly. We help you create a design-led space that adds substantial value to your property.\n## Quality Sanitary Ware and Fittings\nA beautiful bathroom needs more than just nice tiles on the walls and floors. We are trusted sanitary ware suppliers in Dubai offering elegant basins and toilets. Our products comply with international standards to ensure safety and high performance.\nIf you need a sanitary fittings supplier Dubai, look no further than our expert team. We supply shower sets, mixers, and valves that focus on water efficiency and durability. Our fittings are designed to handle daily use while keeping a modern and sleek look.\n## Affordable Pricing and Easy Shopping\nWe know that budget is important when you are planning a large home renovation project. If you are looking for a wc toilet price in UAE, we offer competitive rates for premium items. We provide both wall-hung and floor-mounted toilets to fit your specific bathroom layout.\nYou can also find bathroom accessories UAE online to finish your renovation project. We offer soap dispensers, towel holders, and mirrors that match your new porcelain tiles. These small details make your bathroom feel complete, organized, and very luxurious.\n## Our Commitment to Quality and Sustainability\nPublika is a privately-owned family business that values building long-term trust with clients. We have a quality assurance department that checks every item before it reaches your home. Our products are LEED-certified, which means they are good for the environment and your family.\n- Durability: We provide products that stand the test of time.\n- Sustainability: We care about eco-friendly construction and materials.\n- Efficiency: We help improve your daily living experience and operations.\n- Customer Care: We focus on the unique needs of every valued customer.\nVisit our warehouse at Warehouse Number 37, Span Precast, DIP2, Dubai, UAE. Our seasoned professionals are ready to help you with your renovation vision and goals. Contact us via WhatsApp or phone to get a professional consultation for your home today.","keys":["Porcelain tiles are strong, elegant and handle moisture well in the UAE climate.","They last for many years and are easy to keep clean in busy homes.","Publika brings 15 years of experience in the UAE construction industry.","A wide choice of styles, textures and slabs from top manufacturers.","Professional bathroom renovation as a one-stop solution for homeowners and designers.","Compatibility testing ensures tiles, sanitary ware and fittings work together.","Competitive pricing on premium wall-hung and floor-mounted toilets.","LEED-certified products checked by an in-house quality assurance team."]},{"slug":"premium-sanitary-ware-guide","date":"11 Feb 2026","img":"assets/remote/publika/2026/03/2.png","title":"The Ultimate Guide to Premium Sanitary Ware and Bathroom Renovation in Dubai","body":"A beautiful bathroom makes your home feel like a luxury hotel. It is a private retreat where you relax and refresh every single day. Choosing the right fixtures is the most important step for a perfect home.\nPublika Building & Construction Materials Trading Co.LLC is here to help. We are a family-owned business with over 15 years of industry experience. Our team provides high-quality solutions for all your construction needs.\n## Leading Sanitary Ware Suppliers in Dubai\nWe are known as one of the top sanitary ware suppliers in Dubai. Our products include modern wash basins, bidets, and elegant water closets. Every item is tested by our quality assurance department for perfection.\nWe also act as a trusted sanitary fittings supplier Dubai for big projects. We offer shower sets, mixers, and valves that are built to last. Our fittings focus on five things: durability, aesthetics, sustainability, efficiency, and you.\n## High-Quality Tiles and Surfaces\nPublika is proud to be among the best porcelain tiles suppliers in Dubai. Our porcelain and mosaic collections bring a touch of class to any wall or floor. These tiles are perfect for the humid climate found in the UAE.\nIf you want variety, we are also leading ceramic tile suppliers in UAE. We work with the best tiles manufacturing companies in UAE to give you more choice. Our tiles come in many sizes and effects to match your unique design vision.\n## Professional Dubai Bathroom Renovation Services\nUpdating a bathroom is a smart way to increase your property value. We provide expert Dubai bathroom renovation services for villas and apartments. Our “one-stop solution” makes the process easy for architects and homeowners.\nThere are many bathroom renovation companies in Dubai, but we stand out. We focus on sustainability and offer LEED-certified products for your home. Our seasoned professionals handle everything from design to final finishing.\n## Budget and Modern Accessories\nMany clients ask about the wc toilet price in UAE when planning a project. We offer competitive pricing on premium wall-hung and floor-mounted toilets. Our range ensures you get high quality without overspending your budget.\nYou can also browse for bathroom accessories UAE online to finish your look. We provide everything from soap dispensers to stylish mirrors and vanity sets. These small details help create a cohesive and luxury theme in your space.\n## Why Choose Publika for Your Project?\n- 15 Years of Expertise: We have a deep understanding of the UAE market.\n- Quality Assured: We perform compatibility testing on all our products.\n- Sustainable Choice: Our LEED-certified products help protect the environment.\n- Full Support: We serve architects, designers, developers, and private clients.\nOur goal is to improve your daily operations and your living experience. We believe in delivering sustainable value and building long-term trust. Visit our warehouse in DIP2, Dubai, to see our full collection.\nLet Publika transform your bathroom into a functional and beautiful retreat. Contact us today via WhatsApp or email to start your dream renovation. We are ready to provide the lasting quality and style your home deserves.","keys":["Choosing the right fixtures is the most important step for a perfect bathroom.","Publika is a family-owned business with over 15 years of experience.","Wash basins, bidets and water closets are tested by quality assurance.","Shower sets, mixers and valves are built for durability and efficiency.","Porcelain and mosaic tiles suit the humid UAE climate.","Bathroom renovation is a smart way to increase property value.","Competitive pricing on premium toilets without overspending.","Accessories like dispensers, mirrors and vanity sets complete a cohesive look."]},{"slug":"why-choose-publika","date":"22 Jan 2026","img":"assets/remote/publika/2026/03/bathroom-renovations-kochi.jpg","title":"Top Bathroom Renovation Services in Dubai: Why Choose Publika?","body":"Your bathroom is a private place where you start and end each day. It should be beautiful, comfortable, and work perfectly for your family. Publika Building & Construction Materials Trading Co.LLC helps you create this dream space.\nWe provide the best Dubai bathroom renovation services for every home. Our team has 15 years of experience in the construction industry. We are a family-owned business that cares about quality and trust.\n## Expert Bathroom Renovation Companies in Dubai\nPublika is one of the leading bathroom renovation companies in Dubai. We offer a “one-stop solution” for architects, designers, and homeowners. This means we handle everything you need to make your bathroom look new.\nOur team is made of seasoned professionals who understand the UAE market. We focus on five main things: durability, aesthetics, sustainability, efficiency, and you. Every project we do meets high international standards for quality and safety.\n## Premium Tiles and Sanitary Ware\nWe are proud porcelain tiles suppliers in Dubai with many styles. You can choose from beautiful porcelain and mosaic to fit your taste. These tiles handle the UAE climate well and stay strong for a long time.\nIf you need ceramic tile suppliers in UAE, we have many options too. We work with the top tiles manufacturing companies in UAE to give you variety. Our products include large-format slabs and decorative designs for any space.\nAs trusted sanitary ware suppliers in Dubai, we offer functional fittings. We provide wash basins, bidets, and mirrors that look elegant and modern. Our products are tested to ensure they work perfectly in your home.\n## Quality Fittings and Accessories\nPublika is a top sanitary fittings supplier Dubai for residential projects. We provide shower sets, mixers, and valves that are built to last. Our fittings are water-saving and very easy to maintain over the years.\n- Sanitary Ware: High-quality toilets and basins.\n- Porcelain & Mosaic: Stylish wall and floor options.\n- FRP Panels: Durable and functional wall solutions.\n- Accessories: Everything from soap dispensers to towel racks.\nIf you are checking the wc toilet price in UAE, we offer great value. You can find wall-hung or floor-mounted toilets that fit your budget. We ensure you get the best price for premium products in the market.\n## Trusted Services for Your Home\nYou can also find bathroom accessories UAE online through our partners. This makes it simple to pick the finishing touches for your renovation project. We offer fast delivery and expert support to help you plan everything.\nWhy should you trust Publika for your next home project? We have a special department for quality assurance on every product. Our LEED-certified products show that we care about the environment.\n- 15 Years Experience: We know the UAE construction industry well.\n- Quality Guarantee: We test all products for compatibility.\n- One-Stop Shop: We serve architects, developers, and private clients.\nContact Publika today to start your journey toward a better bathroom. Visit us at our Dubai location or send an email for a consultation. We are ready to build a bathroom you will love for many years to come.","keys":["Publika is a leading bathroom renovation company in Dubai with 15 years of experience.","A one-stop solution for architects, designers and homeowners.","Every project meets international standards for quality and safety.","Porcelain, mosaic and ceramic tiles, including large-format slabs.","Water-saving shower sets, mixers and valves that are easy to maintain.","The range covers sanitary ware, tiles, FRP panels and accessories.","Great value on wall-hung and floor-mounted toilets.","Fast delivery, expert support and LEED-certified products."]}];
+const EMPTY_FORM = { name: '', email: '', phone: '', message: '' };
+
+class Component extends DCLogic {
+  state = { idx: 0, started: false, cart: (() => { try { return JSON.parse(localStorage.getItem('publika_cart') || '[]').filter(id => ALL[id]); } catch (e) { return []; } })(), menuOpen: false, mobileNav: false, drawer: false, toast: '', w: 1280, form: { ...EMPTY_FORM }, sent: false, error: '' };
+  formRef = React.createRef();
+  clrRef = React.createRef();
+
+  componentDidMount() {
+    this.onHash = () => { this.setState({ hash: window.location.hash.slice(1) }); window.scrollTo(0, 0); };
+    window.addEventListener('hashchange', this.onHash);
+    this.setState({ hash: window.location.hash.slice(1) });
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    this.onResize();
+    window.addEventListener('resize', this.onResize);
+    this.startT = setTimeout(() => this.setState({ started: true }), 80);
+    this.startTimer();
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer); clearTimeout(this.startT); clearTimeout(this.toastT);
+    window.removeEventListener('resize', this.onResize);
+  }
+  componentDidUpdate(pp) { if (pp.slideSeconds !== this.props.slideSeconds) this.startTimer(); }
+  dur() { return (this.props.slideSeconds ?? 4) * 1000; }
+  startTimer() {
+    clearInterval(this.timer);
+    this.timer = setInterval(() => this.setState(s => ({ idx: (s.idx + 1) % SLIDES.length })), this.dur());
+  }
+  go(i) { this.setState({ idx: (i + SLIDES.length) % SLIDES.length }); this.startTimer(); }
+  toggle(id) {
+    this.setState(s => {
+      const has = s.cart.includes(id);
+      const next = has ? s.cart.filter(x => x !== id) : [...s.cart, id]; try { localStorage.setItem('publika_cart', JSON.stringify(next)); } catch (e) {}
+      return { cart: next, toast: has ? '' : ALL[id].name + ' added to cart' };
+    });
+    clearTimeout(this.toastT);
+    this.toastT = setTimeout(() => this.setState({ toast: '' }), 2600);
+  }
+  scrollToForm() {
+    const el = this.formRef.current; if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+  }
+  scroller(k, step = 536) {
+    const ref = this['_' + k] || (this['_' + k] = React.createRef());
+    const by = dir => {
+      const el = ref.current; if (!el) return;
+      const max = el.scrollWidth - el.clientWidth;
+      if (dir > 0 && el.scrollLeft >= max - 4) el.scrollTo({ left: 0, behavior: 'smooth' });
+      else if (dir < 0 && el.scrollLeft <= 4) el.scrollTo({ left: max, behavior: 'smooth' });
+      else el.scrollBy({ left: dir * step, behavior: 'smooth' });
+    };
+    return { [k + 'Ref']: ref, [k + 'Prev']: () => by(-1), [k + 'Next']: () => by(1) };
+  }
+  setField(k) { return e => { const v = e.target.value; this.setState(s => ({ form: { ...s.form, [k]: v }, error: '' })); }; }
+
+  searchVals() {
+    const q = this.state.sq || '';
+    const terms = q.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    const idx = window.PUBLIKA_INDEX || [];
+    let res = [];
+    if (terms.length) {
+      res = idx.map(x => { const hay = (x.l + ' ' + (x.s || '') + ' ' + x.c).toLowerCase(); if (!terms.every(t => hay.includes(t))) return null; const ln = x.l.toLowerCase(); const score = (ln.startsWith(terms[0]) ? 0 : ln.includes(terms[0]) ? 1 : 2) + (x.t === 'Product' ? 0.5 : 0); return { x, score }; })
+        .filter(Boolean).sort((a, b) => a.score - b.score).slice(0, 10).map(({ x }) => ({ ...x, hasImg: !!x.i, noImg: !x.i, meta: x.t === 'Product' ? x.s + ' · ' + x.c : x.t === 'Sub-category' ? 'Sub-category · ' + x.c : 'Category', go: () => { window.location.href = x.h; } }));
+    }
+    return {
+      sq: q, sqResults: res, sqOpen: !!this.state.sqFocus && terms.length > 0, sqNone: terms.length > 0 && res.length === 0,
+      sqSet: e => this.setState({ sq: e.target.value, sqFocus: true }),
+      sqFocus: () => this.setState({ sqFocus: true }),
+      sqBlur: () => setTimeout(() => this.setState({ sqFocus: false }), 150),
+      sqKey: e => { if (e.key === 'Enter' && res[0]) window.location.href = res[0].h; if (e.key === 'Escape') this.setState({ sqFocus: false }); }
+    };
+  }
+  renderVals() {
+    const { idx, started, cart, form } = this.state;
+    const zoom = this.props.zoom ?? 0.12;
+    const d = this.dur();
+    const origins = ['center center', 'left center', 'right center', 'center top'];
+    const card = id => { const p = ALL[id]; const inCart = cart.includes(id); return { ...p, inCart, notInCart: !inCart, onAdd: () => this.toggle(id) }; };
+    const map = k => LISTS[k].map(id => ({ ...card(id), isFeatured: k === 'featured', isClearance: k === 'clearance', isDefault: k !== 'featured' && k !== 'clearance' }));
+    const slides = SLIDES.map((s, i) => {
+      const on = i === idx;
+      return {
+        ...s, n: i + 1,
+        opacity: on ? 1 : 0, z: on ? 2 : 1, pe: on ? 'auto' : 'none',
+        scale: on && started ? 1 + zoom : 1,
+        zoomTransition: on ? `transform ${d + 1400}ms cubic-bezier(.25,.1,.25,1)` : 'transform 0ms linear 1300ms',
+        origin: origins[i % 4],
+        textY: on ? '0px' : '24px',
+        bar: on && started ? '100%' : '0%',
+        barTransition: on && started ? `width ${d}ms linear` : 'none',
+        go: () => this.go(i)
+      };
+    });
+    const bh = this.state.hash || '';
+    const bcur = BLOGS_ALL.find(b => b.slug === bh);
+    const parse = txt => txt.split('\n').map(l => {
+      if (l.startsWith('## ')) return { isH: true, text: l.slice(3) };
+      if (l.startsWith('- ')) { const i = l.indexOf(':'); return { isLi: true, label: l.slice(2, i + 1), text: l.slice(i + 1).trim() }; }
+      return { isP: true, text: l };
+    });
+    return {
+      ...this.searchVals(),
+      isList: !bcur,
+      blogList: BLOGS_ALL.map(b => ({ slug: b.slug, title: b.title, date: b.date, img: b.img, href: '#' + b.slug, excerpt: b.body.split('\n')[0] })),
+      blogDetails: BLOGS_ALL.map(b => ({ slug: b.slug, title: b.title, date: b.date, img: b.img, keys: b.keys, active: !!bcur && bcur.slug === b.slug, blocks: bcur && bcur.slug === b.slug ? parse(b.body) : [] })),
+      showTopBar: this.props.showTopBar ?? true,
+      isDesktop: this.state.w >= 1040, isMobile: this.state.w < 1040,
+      mobileNavOpen: this.state.mobileNav && this.state.w < 1040,
+      menuOpen: this.state.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      toggleMobileNav: () => this.setState(s => ({ mobileNav: !s.mobileNav })),
+      closeMobileNav: () => this.setState({ mobileNav: false }),
+      slides,
+      prevSlide: () => this.go(idx - 1),
+      nextSlide: () => this.go(idx + 1),
+      featCounter: String((this.state.featSel || 0) + 1).padStart(2, '0') + ' / ' + String(LISTS.featured.length).padStart(2, '0'),
+      featSpot: LISTS.featured.map((id, i) => { const sel = this.state.featSel || 0; const on = i === sel; return { ...card(id), desc: DESC[id], specs: SPECS[id].map(([ic, label, value]) => ({ label, value, ['is' + ic]: true })), opacity: on ? 1 : 0, pe: on ? 'auto' : 'none', x: on ? '0px' : (i < sel ? '-24px' : '24px') }; }),
+      featPrev: () => this.setState(s => ({ featSel: ((s.featSel || 0) - 1 + LISTS.featured.length) % LISTS.featured.length })),
+      featNext: () => this.setState(s => ({ featSel: ((s.featSel || 0) + 1) % LISTS.featured.length })),
+      clearance: map('clearance'),
+      sanitary: map('sanitary'),
+      porcelain: map('porcelain'),
+      frp: map('frp'),
+      ...this.scroller('san'), ...this.scroller('por'), ...this.scroller('frp'), ...this.scroller('cat', 400), ...this.scroller('blog', 400), ...this.scroller('proj', 400),
+      clrRef: this.clrRef,
+      clrPrev: () => this.clrRef.current && this.clrRef.current.scrollBy({ left: -536, behavior: 'smooth' }),
+      clrNext: () => this.clrRef.current && this.clrRef.current.scrollBy({ left: 536, behavior: 'smooth' }),
+      clients: CLIENTS, blogs: BLOGS, projects: PROJECTS,
+      cartCount: cart.length,
+      cartEmpty: cart.length === 0,
+      cartItems: cart.map(card),
+      drawerOpen: this.state.drawer,
+      openDrawer: () => this.setState({ drawer: true, toast: '' }),
+      closeDrawer: () => this.setState({ drawer: false }),
+      requestQuote: () => { window.location.href = 'Cart.dc.html'; },
+      hasToast: !!this.state.toast, toast: this.state.toast,
+      formRef: this.formRef, form,
+      setName: this.setField('name'), setEmail: this.setField('email'), setPhone: this.setField('phone'), setMessage: this.setField('message'),
+      hasError: !!this.state.error, error: this.state.error,
+      sent: this.state.sent, notSent: !this.state.sent,
+      submit: e => {
+        e.preventDefault();
+        if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) return this.setState({ error: 'Please fill in your name, email and phone number.' });
+        if (!/^\S+@\S+\.\S+$/.test(form.email)) return this.setState({ error: 'Please enter a valid email address.' });
+        this.setState({ sent: true, error: '' });
+      },
+      resetForm: () => this.setState({ sent: false, form: { ...EMPTY_FORM } })
+    };
+  }
+}
+</script>
+</body>
+</html>

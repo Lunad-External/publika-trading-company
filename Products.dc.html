@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Products — Publika Trading Co LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#ffffff;color:#1c2b33;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1d989f;text-decoration:none}
+a:hover{color:#167b81}
+input,textarea,button{font-family:inherit}
+[data-noscroll]::-webkit-scrollbar{display:none}
+
+/* card hover */
+[data-href]:not([style*="grid-area"]),a[href*="Blogs.dc.html#"],a[href*="Projects.dc.html#"]{transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s cubic-bezier(.2,.7,.2,1),border-color .3s !important}
+[data-href]:not([style*="grid-area"]):hover,a[href*="Blogs.dc.html#"]:hover,a[href*="Projects.dc.html#"]:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(28,43,51,.12)}
+[data-href] image-slot,[data-href] img,a[href*="Blogs.dc.html#"] img,a[href*="Projects.dc.html#"] img,a[href*="Blogs.dc.html#"] image-slot,a[href*="Projects.dc.html#"] image-slot{transition:transform .8s cubic-bezier(.2,.7,.2,1) !important}
+[data-href]:hover image-slot,[data-href]:hover img,a[href*="Blogs.dc.html#"]:hover img,a[href*="Projects.dc.html#"]:hover img,a[href*="Blogs.dc.html#"]:hover image-slot,a[href*="Projects.dc.html#"]:hover image-slot{transform:scale(1.07)}
+
+/* whatsapp float */
+[data-wa-float] [data-wa-label]{transition:max-width .45s cubic-bezier(.2,.7,.2,1),opacity .3s ease,margin-left .45s cubic-bezier(.2,.7,.2,1)}
+[data-wa-float]:hover [data-wa-label],[data-wa-float]:focus-visible [data-wa-label]{max-width:140px !important;opacity:1 !important;margin-left:10px !important}
+</style>
+<script src="search-index.js"></script>
+</helmet>
+
+<div style="min-height:100vh;background:#ffffff">
+
+<header style="position:sticky;top:0;z-index:50;background:#ffffff;border-bottom:1px solid #e3eaeb">
+  <div style="position:relative;z-index:60;border-bottom:1px solid #e3eaeb;background:#f4f8f8">
+    <div style="max-width:1320px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:12px">
+      <div style="position:relative;flex:1;min-width:0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5b6b73" stroke-width="2" stroke-linecap="round" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);pointer-events:none"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+        <input type="search" value="{{ sq }}" onChange="{{ sqSet }}" onFocus="{{ sqFocus }}" onBlur="{{ sqBlur }}" onKeyDown="{{ sqKey }}" placeholder="Search products, categories and sub-categories" aria-label="Search products" style="width:100%;box-sizing:border-box;height:44px;padding:0 16px 0 42px;border:1px solid #cfdcde;border-radius:12px;background:#ffffff;font-family:'DM Sans',sans-serif;font-size:15px;color:#1c2b33;outline:none" style-focus="border-color:#1d989f"></input>
+        <sc-if value="{{ sqOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:60;background:#ffffff;border:1px solid #e3eaeb;border-radius:10px;box-shadow:0 24px 50px rgba(28,43,51,0.14);max-height:440px;overflow-y:auto;padding:6px">
+            <sc-for list="{{ sqResults }}" as="r" hint-placeholder-count="0">
+              <a href="{{ r.h }}" onMouseDown="{{ r.go }}" style="display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:6px;color:#1c2b33" style-hover="background:#eef6f7;color:#1c2b33">
+                <span style="position:relative;flex:none;width:40px;height:40px;border-radius:6px;overflow:hidden;background:#eef6f7;display:flex;align-items:center;justify-content:center">
+                  <sc-if value="{{ r.hasImg }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;inset:0;background-color:#ffffff;background-image:url({{ r.i }});background-position:center;background-size:contain;background-repeat:no-repeat"></span></sc-if>
+                  <sc-if value="{{ r.noImg }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d989f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg></sc-if>
+                </span>
+                <span style="display:flex;flex-direction:column;gap:2px;min-width:0">
+                  <span style="font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.l }}</span>
+                  <span style="font-size:12px;color:#5b6b73;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.meta }}</span>
+                </span>
+              </a>
+            </sc-for>
+            <sc-if value="{{ sqNone }}" hint-placeholder-val="{{ false }}"><div style="padding:16px 12px;font-size:14px;color:#5b6b73">No results for "{{ sq }}"</div></sc-if>
+          </div>
+        </sc-if>
+      </div>
+      <button onClick="{{ openDrawer }}" style="flex:none;position:relative;display:flex;align-items:center;gap:10px;height:44px;padding:0 16px;border:1px solid #cfdcde;background:#ffffff;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;color:#1c2b33" style-hover="border-color:#1d989f">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d989f" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>
+        <span>Cart</span>
+        <span style="min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#1d989f;color:#ffffff;font-size:12px;display:flex;align-items:center;justify-content:center">{{ cartCount }}</span>
+      </button>
+    </div>
+  </div>
+  <div style="max-width:1320px;margin:0 auto;padding:0 24px;height:84px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="Home.dc.html" style="display:flex;align-items:center;flex:none"><img src="assets/publika-logo.png" alt="Publika Trading Co LLC" style="height:46px;width:auto;display:block"></a>
+
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+    <nav style="display:flex;align-items:center;gap:4px;height:100%;margin-left:auto;margin-right:-14px">
+      <a href="About%20Us.dc.html" style="padding:10px 14px;font-size:15px;font-weight:500;color:#1c2b33" style-hover="color:#1d989f">About Us</a>
+      <div onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:relative;height:100%;display:flex;align-items:center">
+        <a href="Products.dc.html" style="padding:10px 14px;font-size:15px;font-weight:500;color:#1c2b33;display:flex;align-items:center;gap:6px" style-hover="color:#1d989f">Products <span style="font-size:10px;color:#1d989f">▼</span></a>
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:100%;left:50%;transform:translateX(-50%);width:760px;background:#ffffff;border:1px solid #e3eaeb;border-top:3px solid #1d989f;border-radius:0 0 10px 10px;box-shadow:0 24px 50px rgba(28,43,51,0.12);padding:28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="Category.dc.html#sanitary" style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;color:#22546f;padding-bottom:8px;border-bottom:1px solid #e3eaeb">Sanitary Ware &amp; Fittings</a>
+            <a href="Category.dc.html#sanitary/wcs" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">WCs</a>
+            <a href="Category.dc.html#sanitary/wash-basin" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Wash Basins</a>
+            <a href="Category.dc.html#sanitary/taps" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Taps</a>
+            <a href="Category.dc.html#sanitary" style="margin-top:4px;font-size:14px;font-weight:600;color:#1d989f;display:inline-flex;align-items:center;gap:6px" style-hover="color:#167b81">View more <span>→</span></a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="Category.dc.html#porcelain" style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;color:#22546f;padding-bottom:8px;border-bottom:1px solid #e3eaeb">Porcelain &amp; Mosaic</a>
+            <a href="Category.dc.html#porcelain/quartz-tiles" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Quartz Tiles</a>
+            <a href="Category.dc.html#porcelain/porcelain-tiles" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Porcelain Tiles</a>
+            <a href="Category.dc.html#porcelain/ceramic-tiles" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Ceramic Tiles</a>
+            <a href="Category.dc.html#porcelain" style="margin-top:4px;font-size:14px;font-weight:600;color:#1d989f;display:inline-flex;align-items:center;gap:6px" style-hover="color:#167b81">View more <span>→</span></a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="Category.dc.html#frp" style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;color:#22546f;padding-bottom:8px;border-bottom:1px solid #e3eaeb">FRP Panels</a>
+            <a href="Category.dc.html#frp/wall-panels" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Wall Panels</a>
+            <a href="Category.dc.html#frp/ceiling-panels" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Ceiling Panels</a>
+            <a href="Category.dc.html#frp/food-grade-sheets" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Food-Grade Sheets</a>
+            <a href="Category.dc.html#frp" style="margin-top:4px;font-size:14px;font-weight:600;color:#1d989f;display:inline-flex;align-items:center;gap:6px" style-hover="color:#167b81">View more <span>→</span></a>
+          </div>
+        </div>
+        </sc-if>
+      </div>
+      <a href="Projects.dc.html" style="padding:10px 14px;font-size:15px;font-weight:500;color:#1c2b33" style-hover="color:#1d989f">Projects</a>
+      <a href="Company%20Profile.dc.html" style="padding:10px 14px;font-size:15px;font-weight:500;color:#1c2b33" style-hover="color:#1d989f">Company Profile</a>
+      <a href="Blogs.dc.html" style="padding:10px 14px;font-size:15px;font-weight:500;color:#1c2b33" style-hover="color:#1d989f">Blogs</a>
+      <a href="Contact%20Us.dc.html" style="padding:10px 14px;font-size:15px;font-weight:500;color:#1c2b33" style-hover="color:#1d989f">Contact Us</a>
+    </nav>
+    </sc-if>
+
+    <div style="display:contents">
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMobileNav }}" style="width:44px;height:44px;border:1px solid #e3eaeb;background:#ffffff;border-radius:6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px">
+          <span style="width:18px;height:2px;background:#22546f"></span><span style="width:18px;height:2px;background:#22546f"></span><span style="width:18px;height:2px;background:#22546f"></span>
+        </button>
+      </sc-if>
+    </div>
+  </div>
+  <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="border-top:1px solid #e3eaeb;padding:8px 24px 18px;display:flex;flex-direction:column">
+      <a href="About%20Us.dc.html" onClick="{{ closeMobileNav }}" style="padding:12px 0;border-bottom:1px solid #eef2f3;color:#1c2b33;font-weight:500">About Us</a>
+      <a href="Products.dc.html" onClick="{{ closeMobileNav }}" style="padding:12px 0;border-bottom:1px solid #eef2f3;color:#1c2b33;font-weight:500">Products</a>
+      <a href="Category.dc.html#sanitary" onClick="{{ closeMobileNav }}" style="padding:10px 0 10px 16px;border-bottom:1px solid #eef2f3;color:#5b6b73;font-size:14px">Sanitary Ware &amp; Fittings</a>
+      <a href="Category.dc.html#porcelain" onClick="{{ closeMobileNav }}" style="padding:10px 0 10px 16px;border-bottom:1px solid #eef2f3;color:#5b6b73;font-size:14px">Porcelain &amp; Mosaic</a>
+      <a href="Category.dc.html#frp" onClick="{{ closeMobileNav }}" style="padding:10px 0 10px 16px;border-bottom:1px solid #eef2f3;color:#5b6b73;font-size:14px">FRP Panels</a>
+      <a href="Projects.dc.html" onClick="{{ closeMobileNav }}" style="padding:12px 0;border-bottom:1px solid #eef2f3;color:#1c2b33;font-weight:500">Projects</a>
+      <a href="Company%20Profile.dc.html" onClick="{{ closeMobileNav }}" style="padding:12px 0;border-bottom:1px solid #eef2f3;color:#1c2b33;font-weight:500">Company Profile</a>
+      <a href="Blogs.dc.html" onClick="{{ closeMobileNav }}" style="padding:12px 0;border-bottom:1px solid #eef2f3;color:#1c2b33;font-weight:500">Blogs</a>
+      <a href="Contact%20Us.dc.html" onClick="{{ closeMobileNav }}" style="padding:12px 0;color:#1c2b33;font-weight:500">Contact Us</a>
+    </nav>
+  </sc-if>
+</header>
+
+<section data-screen-label="Products hero" style="position:relative;height:clamp(320px,38vw,460px);overflow:hidden;background:#0f2e3d">
+  <image-slot id="products-hero" shape="rect" src="assets/remote/publika/2023/02/SANITARY-WARE-_-FITTINGS-1.jpg" placeholder="Products banner"></image-slot>
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,38,51,0.85) 0%,rgba(12,38,51,0.5) 60%,rgba(12,38,51,0.25) 100%);pointer-events:none"></div>
+  <div style="position:absolute;inset:0;display:flex;align-items:center;pointer-events:none">
+    <div style="max-width:1320px;width:100%;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:8px;font-size:14px;color:#cfe3e8;pointer-events:auto"><a href="Home.dc.html" style="color:#7fd6db">Home</a><span>/</span><span>Products</span></div>
+      <h1 style="margin:0;font-family:'Poppins',sans-serif;font-weight:600;font-size:clamp(36px,5vw,60px);line-height:1.1;color:#ffffff">Our Products</h1>
+      <p style="margin:0;max-width:600px;font-size:clamp(16px,1.4vw,19px);line-height:1.6;color:#e8f1f2">Designed to function. Built to last.</p>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Products intro" style="max-width:1320px;margin:0 auto;padding:80px 24px">
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <h2 style="margin:0;font-family:'Poppins',sans-serif;font-size:clamp(28px,3vw,40px);font-weight:600;line-height:1.2;color:#22546f;text-wrap:balance">Sanitary Ware, Tiles &amp; FRP Panels Supplier in Dubai</h2>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <p style="margin:0;font-size:17px;line-height:1.8;color:#3c4d55;text-wrap:pretty">Publika supplies premium building and construction materials across Dubai and the UAE, from water-saving sanitary ware and stainless steel washroom accessories to European and American porcelain, quartz and mosaic tiles and hygienic FRP wall panels.</p>
+      <p style="margin:0;font-size:17px;line-height:1.8;color:#3c4d55;text-wrap:pretty">Sourced from leading international brands such as Delabie, Geberit, Bobrick, Zurn and Schell, our LEED-certified products comply with international standards and are backed by compatibility testing, quick delivery and dependable after-sales support for residential, hospitality, healthcare and commercial projects.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px">
+        <a href="#sanitary" style="height:44px;padding:0 20px;display:inline-flex;align-items:center;border-radius:6px;background:#eef6f7;color:#22546f;font-weight:600;font-size:14px" style-hover="background:#1d989f;color:#ffffff">Sanitary Ware &amp; Fittings</a>
+        <a href="#porcelain" style="height:44px;padding:0 20px;display:inline-flex;align-items:center;border-radius:6px;background:#eef6f7;color:#22546f;font-weight:600;font-size:14px" style-hover="background:#1d989f;color:#ffffff">Porcelain &amp; Mosaic</a>
+        <a href="#frp" style="height:44px;padding:0 20px;display:inline-flex;align-items:center;border-radius:6px;background:#eef6f7;color:#22546f;font-weight:600;font-size:14px" style-hover="background:#1d989f;color:#ffffff">FRP Panels</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sanitary" data-screen-label="Sanitary Ware & Fittings" style="background:#ffffff;border-top:1px solid #e3eaeb">
+  <div style="max-width:1320px;margin:0 auto;padding:80px 24px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px">
+      <h2 style="margin:0;font-family:'Poppins',sans-serif;font-size:clamp(28px,3vw,40px);font-weight:600;line-height:1.15;color:#22546f">Sanitary Ware &amp; Fittings</h2>
+      <a href="Category.dc.html#sanitary" style="display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 24px;background:#1d989f;color:#ffffff;border-radius:6px;font-weight:600;font-size:14px;white-space:nowrap" style-hover="background:#167b81;color:#ffffff">View All <span>→</span></a>
+    </div>
+    <p style="margin:0 0 20px;font-size:16px;line-height:1.75;color:#5b6b73;text-wrap:pretty">Shop premium sanitary ware and bathroom fittings in Dubai, including wall-hung WCs, concealed cisterns, sensor and time-flow taps, mixers, soap and towel dispensers, grab bars and shower seats. Built from durable, water-saving stainless steel and vitreous china for homes, hotels, hospitals and public washrooms across the UAE.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px"><a href="#" style="height:36px;padding:0 16px;white-space:nowrap;display:inline-flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:14px;color:#22546f;background:#ffffff" style-hover="border-color:#1d989f;color:#1d989f">WCs</a><a href="#" style="height:36px;padding:0 16px;white-space:nowrap;display:inline-flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:14px;color:#22546f;background:#ffffff" style-hover="border-color:#1d989f;color:#1d989f">Mixers &amp; Taps</a><a href="#" style="height:36px;padding:0 16px;white-space:nowrap;display:inline-flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:14px;color:#22546f;background:#ffffff" style-hover="border-color:#1d989f;color:#1d989f">Flush Valves</a><a href="#" style="height:36px;padding:0 16px;white-space:nowrap;display:inline-flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:14px;color:#22546f;background:#ffffff" style-hover="border-color:#1d989f;color:#1d989f">Washroom Accessories</a><a href="#" style="height:36px;padding:0 16px;white-space:nowrap;display:inline-flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:14px;color:#22546f;background:#ffffff" style-hover="border-color:#1d989f;color:#1d989f">Soap Dispensers</a></div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px">
+      <sc-for list="{{ prodSan }}" as="p" hint-placeholder-count="8">
+        <div data-href="{{ p.href }}" style="cursor:pointer;display:flex;flex-direction:column;gap:14px;padding:14px;background:#ffffff;border:1px solid #e3eaeb;border-radius:12px;transition:border-color .25s, box-shadow .25s" style-hover="border-color:#1d989f;box-shadow:0 12px 28px rgba(29,152,159,0.12)">
+          <div style="position:relative;aspect-ratio:1 / 1;border-radius:8px;overflow:hidden;background:#f3f7f7">
+<sc-if value="{{ p.isClr }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:10px;left:10px;z-index:2;display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:11px;background:rgba(255,255,255,0.92);border:1px solid #f0d9d4;color:#c4452f;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase">Clearance</span></sc-if>
+            <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;transition:transform .5s ease" style-hover="transform:scale(1.06)"><image-slot id="pp-{{ p.id }}" shape="rect" fit="{{ p.fit }}" src="{{ p.img }}" placeholder="{{ p.ph }}"></image-slot></div></sc-if>
+            <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#eef6f7"><svg width="84" height="84" viewBox="0 0 64 64" fill="none" stroke="#1d989f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="8" width="26" height="48" rx="1"></rect><path d="M38 12l12 4v40l-12-4"></path><path d="M18 16l8 10"></path><path d="M18 24l5 6"></path></svg><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5b8a8e">FRP panel</span></div></sc-if>
+          </div>
+          <div style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:500;line-height:1.35;color:#1c2b33;height:2.7em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">{{ p.name }}</div>
+          <a href="{{ p.href }}" style="display:flex;align-items:center;justify-content:center;gap:8px;height:42px;padding:0 12px;white-space:nowrap;background:#1d989f;color:#ffffff;border-radius:6px;font-size:14px;font-weight:600" style-hover="background:#167b81;color:#ffffff">View Details <span>→</span></a>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="porcelain" data-screen-label="Porcelain & Mosaic" style="background:#f4f8f8;border-top:1px solid #e3eaeb">
+  <div style="max-width:1320px;margin:0 auto;padding:80px 24px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px">
+      <h2 style="margin:0;font-family:'Poppins',sans-serif;font-size:clamp(28px,3vw,40px);font-weight:600;line-height:1.15;color:#22546f">Porcelain &amp; Mosaic</h2>
+      <a href="Category.dc.html#porcelain" style="display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 24px;background:#1d989f;color:#ffffff;border-radius:6px;font-weight:600;font-size:14px;white-space:nowrap" style-hover="background:#167b81;color:#ffffff">View All <span>→</span></a>
+    </div>
+    <p style="margin:0 0 20px;font-size:16px;line-height:1.75;color:#5b6b73;text-wrap:pretty">Explore quartz, porcelain, ceramic and mosaic tiles in Dubai, sourced from European and American markets. With natural marble-look veining, elegant gloss and anti-slip performance, our surfaces suit floors, walls, kitchen countertops and bathroom vanities in residential and commercial projects across the UAE.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px"><a href="#" style="height:36px;padding:0 16px;white-space:nowrap;display:inline-flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:14px;color:#22546f;background:#ffffff" style-hover="border-color:#1d989f;color:#1d989f">Quartz Tiles</a><a href="#" style="height:36px;padding:0 16px;white-space:nowrap;display:inline-flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:14px;color:#22546f;background:#ffffff" style-hover="border-color:#1d989f;color:#1d989f">Porcelain Tiles</a><a href="#" style="height:36px;padding:0 16px;white-space:nowrap;display:inline-flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:14px;color:#22546f;background:#ffffff" style-hover="border-color:#1d989f;color:#1d989f">Ceramic Tiles</a><a href="#" style="height:36px;padding:0 16px;white-space:nowrap;display:inline-flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:14px;color:#22546f;background:#ffffff" style-hover="border-color:#1d989f;color:#1d989f">Mosaic Tiles</a></div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px">
+      <sc-for list="{{ prodTile }}" as="p" hint-placeholder-count="8">
+        <div data-href="{{ p.href }}" style="cursor:pointer;display:flex;flex-direction:column;gap:14px;padding:14px;background:#ffffff;border:1px solid #e3eaeb;border-radius:12px;transition:border-color .25s, box-shadow .25s" style-hover="border-color:#1d989f;box-shadow:0 12px 28px rgba(29,152,159,0.12)">
+          <div style="position:relative;aspect-ratio:1 / 1;border-radius:8px;overflow:hidden;background:#f3f7f7">
+<sc-if value="{{ p.isClr }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:10px;left:10px;z-index:2;display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:11px;background:rgba(255,255,255,0.92);border:1px solid #f0d9d4;color:#c4452f;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase">Clearance</span></sc-if>
+            <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;transition:transform .5s ease" style-hover="transform:scale(1.06)"><image-slot id="pp-{{ p.id }}" shape="rect" fit="{{ p.fit }}" src="{{ p.img }}" placeholder="{{ p.ph }}"></image-slot></div></sc-if>
+            <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#eef6f7"><svg width="84" height="84" viewBox="0 0 64 64" fill="none" stroke="#1d989f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="8" width="26" height="48" rx="1"></rect><path d="M38 12l12 4v40l-12-4"></path><path d="M18 16l8 10"></path><path d="M18 24l5 6"></path></svg><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5b8a8e">FRP panel</span></div></sc-if>
+          </div>
+          <div style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:500;line-height:1.35;color:#1c2b33;height:2.7em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">{{ p.name }}</div>
+          <a href="{{ p.href }}" style="display:flex;align-items:center;justify-content:center;gap:8px;height:42px;padding:0 12px;white-space:nowrap;background:#1d989f;color:#ffffff;border-radius:6px;font-size:14px;font-weight:600" style-hover="background:#167b81;color:#ffffff">View Details <span>→</span></a>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="frp" data-screen-label="FRP Panels" style="background:#ffffff;border-top:1px solid #e3eaeb">
+  <div style="max-width:1320px;margin:0 auto;padding:80px 24px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px">
+      <h2 style="margin:0;font-family:'Poppins',sans-serif;font-size:clamp(28px,3vw,40px);font-weight:600;line-height:1.15;color:#22546f">FRP Panels</h2>
+      <a href="Category.dc.html#frp" style="display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 24px;background:#1d989f;color:#ffffff;border-radius:6px;font-weight:600;font-size:14px;white-space:nowrap" style-hover="background:#167b81;color:#ffffff">View All <span>→</span></a>
+    </div>
+    <p style="margin:0 0 20px;font-size:16px;line-height:1.75;color:#5b6b73;text-wrap:pretty">Buy FRP panels in Dubai for hygienic, moisture-resistant walls and ceilings. Our fibre-reinforced plastic sheets and trims are easy to clean, impact resistant and low maintenance, ideal for commercial kitchens, food-processing units, cold rooms, hospitals and washrooms across the UAE.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px"><a href="#" style="height:36px;padding:0 16px;white-space:nowrap;display:inline-flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:14px;color:#22546f;background:#ffffff" style-hover="border-color:#1d989f;color:#1d989f">Wall Panels</a><a href="#" style="height:36px;padding:0 16px;white-space:nowrap;display:inline-flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:14px;color:#22546f;background:#ffffff" style-hover="border-color:#1d989f;color:#1d989f">Ceiling Panels</a><a href="#" style="height:36px;padding:0 16px;white-space:nowrap;display:inline-flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:14px;color:#22546f;background:#ffffff" style-hover="border-color:#1d989f;color:#1d989f">Food-Grade Sheets</a><a href="#" style="height:36px;padding:0 16px;white-space:nowrap;display:inline-flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:14px;color:#22546f;background:#ffffff" style-hover="border-color:#1d989f;color:#1d989f">Trims &amp; Profiles</a></div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px">
+      <sc-for list="{{ prodFrp }}" as="p" hint-placeholder-count="8">
+        <div data-href="{{ p.href }}" style="cursor:pointer;display:flex;flex-direction:column;gap:14px;padding:14px;background:#ffffff;border:1px solid #e3eaeb;border-radius:12px;transition:border-color .25s, box-shadow .25s" style-hover="border-color:#1d989f;box-shadow:0 12px 28px rgba(29,152,159,0.12)">
+          <div style="position:relative;aspect-ratio:1 / 1;border-radius:8px;overflow:hidden;background:#f3f7f7">
+<sc-if value="{{ p.isClr }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:10px;left:10px;z-index:2;display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:11px;background:rgba(255,255,255,0.92);border:1px solid #f0d9d4;color:#c4452f;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase">Clearance</span></sc-if>
+            <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;transition:transform .5s ease" style-hover="transform:scale(1.06)"><image-slot id="pp-{{ p.id }}" shape="rect" fit="{{ p.fit }}" src="{{ p.img }}" placeholder="{{ p.ph }}"></image-slot></div></sc-if>
+            <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#eef6f7"><svg width="84" height="84" viewBox="0 0 64 64" fill="none" stroke="#1d989f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="8" width="26" height="48" rx="1"></rect><path d="M38 12l12 4v40l-12-4"></path><path d="M18 16l8 10"></path><path d="M18 24l5 6"></path></svg><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5b8a8e">FRP panel</span></div></sc-if>
+          </div>
+          <div style="font-family:'Poppins',sans-serif;font-size:15px;font-weight:500;line-height:1.35;color:#1c2b33;height:2.7em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">{{ p.name }}</div>
+          <a href="{{ p.href }}" style="display:flex;align-items:center;justify-content:center;gap:8px;height:42px;padding:0 12px;white-space:nowrap;background:#1d989f;color:#ffffff;border-radius:6px;font-size:14px;font-weight:600" style-hover="background:#167b81;color:#ffffff">View Details <span>→</span></a>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+
+<footer style="background:#f4f8f8;border-top:1px solid #e3eaeb">
+  <div style="max-width:1320px;margin:0 auto;padding:64px 24px 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px">
+    <div style="display:flex;flex-direction:column;gap:18px;grid-column:span 1">
+      <img src="assets/publika-logo.png" alt="Publika Trading Co LLC" style="height:44px;width:auto;align-self:flex-start">
+      <p style="margin:0;font-size:14px;line-height:1.7;color:#5b6b73">Publika Building &amp; Construction Materials Trading Co. LLC is a privately-owned business offering a one-stop solution for architects, interior designers, developers, retailers, and private clients.</p>
+      <div style="display:flex;gap:10px">
+        <a href="https://www.facebook.com/share/1BFs4fwjBi/?mibextid=wwXIfr" style="height:36px;padding:0 14px;display:flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:13px;color:#22546f" style-hover="background:#1d989f;color:#ffffff;border-color:#1d989f">Facebook</a>
+        <a href="https://www.instagram.com/publikatradingco?igsh=dWZvN2xkejN1YXI4" style="height:36px;padding:0 14px;display:flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:13px;color:#22546f" style-hover="background:#1d989f;color:#ffffff;border-color:#1d989f">Instagram</a>
+        <a href="https://www.linkedin.com/company/publika-trading-co/" style="height:36px;padding:0 14px;display:flex;align-items:center;border:1px solid #cfdcde;border-radius:18px;font-size:13px;color:#22546f" style-hover="background:#1d989f;color:#ffffff;border-color:#1d989f">LinkedIn</a>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:600;color:#22546f;margin-bottom:6px">Main Menu</div>
+      <a href="About%20Us.dc.html" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">About Us</a>
+      <a href="Projects.dc.html" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Projects</a>
+      <a href="Company%20Profile.dc.html" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Company Profile</a>
+      <a href="Blogs.dc.html" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Blogs</a>
+      <a href="Contact%20Us.dc.html" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Contact Us</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:600;color:#22546f;margin-bottom:6px">Our Products</div>
+      <a href="#sanitary" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Sanitary Ware &amp; Fittings</a>
+      <a href="#porcelain" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">Porcelain &amp; Mosaic</a>
+      <a href="#frp" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">FRP Panels</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:600;color:#22546f;margin-bottom:6px">Contact Us</div>
+      <a href="tel:+97143353724" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">+971 4 335 3724</a>
+      <a href="https://wa.me/971529104923" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">WhatsApp: +971 52 910 4923</a>
+      <a href="mailto:info@publika.ae" style="font-size:14px;color:#5b6b73" style-hover="color:#1d989f">info@publika.ae</a>
+      <div style="font-size:14px;line-height:1.6;color:#5b6b73">Warehouse Number 37, Span Precast, DIP2, Dubai, UAE, PO Box No: 26344</div>
+    </div>
+  </div>
+  <div style="background:#1d989f;color:#ffffff">
+    <div style="max-width:1320px;margin:0 auto;padding:16px 24px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px">
+      <div>© 2026 Publika Building &amp; Construction Materials Trading Co. LLC. All rights reserved.</div>
+      <div>Dubai, United Arab Emirates</div>
+    </div>
+  </div>
+</footer>
+
+<sc-if value="{{ drawerOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeDrawer }}" style="position:fixed;inset:0;background:rgba(12,38,51,0.45);z-index:90"></div>
+  <aside style="position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:#ffffff;z-index:91;display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(12,38,51,0.18)">
+    <div style="height:76px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e3eaeb">
+      <div style="font-family:'Poppins',sans-serif;font-size:19px;font-weight:600;color:#22546f">Enquiry List ({{ cartCount }})</div>
+      <button onClick="{{ closeDrawer }}" aria-label="Close" style="width:40px;height:40px;border:1px solid #e3eaeb;background:#ffffff;border-radius:6px;font-size:20px;color:#1c2b33;cursor:pointer">×</button>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:8px 24px">
+      <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:48px 0;text-align:center;color:#5b6b73;font-size:15px;line-height:1.6">Your enquiry list is empty.<br>Add products to request a quotation.</div>
+      </sc-if>
+      <sc-for list="{{ cartItems }}" as="it" hint-placeholder-count="0">
+        <div style="display:flex;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid #eef2f3">
+          <div style="width:56px;height:56px;border-radius:6px;background:#f3f7f7;flex:none;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,monospace;font-size:10px;color:#8a989e">IMG</div>
+          <div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1d989f">{{ it.cat }}</div><div style="font-size:15px;font-weight:500;color:#1c2b33">{{ it.name }}</div></div>
+          <button onClick="{{ it.onAdd }}" style="border:0;background:transparent;color:#5b6b73;font-size:13px;text-decoration:underline;cursor:pointer">Remove</button>
+        </div>
+      </sc-for>
+    </div>
+    <div style="padding:20px 24px;border-top:1px solid #e3eaeb;display:flex;flex-direction:column;gap:10px">
+      <button onClick="{{ requestQuote }}" style="height:50px;border:0;background:#1d989f;color:#ffffff;border-radius:6px;font-size:15px;font-weight:600;cursor:pointer" style-hover="background:#167b81">View Enquiry Cart</button>
+      <div style="font-size:12px;color:#5b6b73;text-align:center">No payment required. Our team will contact you with pricing.</div>
+    </div>
+  </aside>
+</sc-if>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:95;background:#22546f;color:#ffffff;padding:14px 22px;border-radius:8px;font-size:14px;box-shadow:0 12px 30px rgba(12,38,51,0.25);display:flex;gap:16px;align-items:center">
+    <span>{{ toast }}</span>
+    <button onClick="{{ openDrawer }}" style="border:0;background:transparent;color:#7fd6db;font-weight:700;font-size:14px;cursor:pointer;padding:0">View list</button>
+  </div>
+</sc-if>
+
+
+<a href="https://wa.me/971529104923?text=Hi%20Publika%2C%20I%20have%20an%20enquiry" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp" data-wa-float="1" style="position:fixed;right:24px;bottom:24px;z-index:80;display:flex;align-items:center;height:56px;padding:0 15px;border-radius:28px;overflow:hidden;background:#25D366;color:#ffffff;font-family:'DM Sans',system-ui,sans-serif;font-size:15px;font-weight:600;box-shadow:0 12px 30px rgba(18,140,126,0.35);transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s" style-hover="transform:translateY(-3px);box-shadow:0 16px 36px rgba(18,140,126,0.45);color:#ffffff">
+  <svg width="26" height="26" viewBox="0 0 32 32" fill="#ffffff" aria-hidden="true"><path d="M16.04 3C9.06 3 3.4 8.66 3.4 15.64c0 2.23.58 4.4 1.69 6.32L3.3 28.7l6.93-1.82a12.6 12.6 0 0 0 5.8 1.42h.01c6.98 0 12.64-5.66 12.64-12.64S23.02 3 16.04 3zm0 23.15h-.01a10.5 10.5 0 0 1-5.35-1.47l-.38-.23-4.11 1.08 1.1-4.01-.25-.41a10.46 10.46 0 0 1-1.6-5.57c0-5.8 4.72-10.52 10.53-10.52 2.81 0 5.45 1.1 7.44 3.08a10.45 10.45 0 0 1 3.08 7.45c0 5.8-4.72 10.52-10.45 10.52zm5.77-7.88c-.32-.16-1.87-.92-2.16-1.03-.29-.11-.5-.16-.71.16-.21.32-.82 1.03-1 1.24-.18.21-.37.24-.69.08-.32-.16-1.33-.49-2.54-1.57-.94-.84-1.57-1.87-1.75-2.19-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.55.16-.18.21-.32.32-.53.11-.21.05-.4-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.4-.29.32-1.1 1.08-1.1 2.63s1.13 3.05 1.29 3.26c.16.21 2.22 3.39 5.38 4.75.75.32 1.34.52 1.8.66.76.24 1.44.21 1.99.13.61-.09 1.87-.76 2.13-1.5.26-.74.26-1.37.18-1.5-.08-.13-.29-.21-.61-.37z"></path></svg>
+  <span data-wa-label="1" style="display:inline-block;max-width:0;opacity:0;margin-left:0;white-space:nowrap;overflow:hidden">Chat with us</span>
+</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;slideSeconds&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:4,&quot;min&quot;:3,&quot;max&quot;:8,&quot;step&quot;:0.5,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero slider&quot;},&quot;zoom&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.12,&quot;min&quot;:0,&quot;max&quot;:0.25,&quot;step&quot;:0.01,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero slider&quot;},&quot;showTopBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Header&quot;}}">
+const P = (id, name, cat, ph) => ({ id, name, cat, ph: ph || 'product shot', fit: ph === 'tile swatch' ? 'cover' : 'contain', img: '' });
+const SAN = [
+  P('s1','Wall-hung S21 S WC Pan','WCs'), P('s2','Countertop Wash Basin','Wash Basin'), P('s3','Electronic Sensor Basin Tap','Taps'),
+  P('s4','TEMPOMIX 3 Time Flow Mixer','Mixers'), P('s5','Automatic Soap Dispenser','Soap Dispenser'), P('s6','High-Speed Hand Dryer','Hand Dryers'),
+  P('s7','Stainless Steel Grab Bar','Grab Bars'), P('s8','Horizontal Baby Changing Station','Baby Station'), P('s9','Jumbo Roll Tissue Dispenser','Toilet Tissue Dispensers'),
+  P('s10','Recessed Mirror Cabinet','Mirror Cabinets'), P('s11','Concealed Flush Valve','Flush Valve'), P('s12','Bottle Filler Station','Bottle Fillers'),
+  P('s13','Lift-up Comfort Shower Seat','Shower Seats'), P('s14','Electronic Shower Control','Electronic Showers'), P('s15','Combination Towel Dispenser & Waste','Combination Towel'),
+  P('s16','WC Module MONTUS','Flush Valve'), P('s17','Wall-Mounted Urinal','Urinals'), P('s18','Freestanding Bathtub','Shower & Tub'), P('s20','Geberit Selnova Comfort Wall-hung WC','WCs')
+];
+const TILE = ['Alluring','Bianco Cristallo','Bianco Gioa','Bianco Ibiza','Bianco Oro','Bianco River','Bianco Superiore','Bianco Venatino','Black Canvas Slab','Calacatta Elegante','Calacatta Gold Mist','Calacatta Imperiale','Calacatta Nero','Calacatta Pristine','Calacatta Rivolo','Carara Classico Superior']
+  .map((n, i) => P('t' + (i + 1), n, 'Quartz Tiles', 'tile swatch'));
+const FRP = [P('f1','Food-Grade Glossy FRP Sheet','FRP Panels'), P('f2','Embossed FRP Wall Panel','FRP Panels'), P('f3','Smooth White FRP Panel','FRP Panels'), P('f4','FRP Ceiling Panel','FRP Panels'), P('f5','Fire-Retardant FRP Panel','FRP Panels')];
+const ALL = {}; [...SAN, ...TILE, ...FRP].forEach(p => ALL[p.id] = p);
+const IMG = {
+  s1: '2025/07/Wall-hung-S21-S-WC-pan.jpg', s4: '2025/07/TEMPOMIX-3-time-flow-mixer-1.jpg', s13: '2025/07/Lift-up-Comfort-shower-seat.jpg',
+  s16: '2025/07/WC-module-MONTUS-1-1.jpg', s20: '2025/09/DAS_1540703_20191111.webp',
+  t1: '2025/09/Alluring.jpg', t13: '2025/09/CALACATTA-NERO-scaled-1.jpg', t15: '2025/09/Calacatta-Rivolo-Full-Slab-View-1-scaled-1.jpg',
+  f1: '2025/01/decopan-food-glossy-grp-sheet-laminate-5941.jpg'
+};
+Object.keys(IMG).forEach(k => ALL[k].img = 'assets/remote/publika/' + IMG[k]);
+const REAL = {"t8":["Sparkle White","Quartz Tiles","2025/09/SPARKLE-WHITE-FEATURED-iMAGE.jpg"],"t9":["Black Canvas Slab","Quartz Tiles","2025/09/Black-Canvas-Slab-FEATURED-iMAGE.jpg"],"t10":["Staturio Extra","Quartz Tiles","2025/09/STATURIO-EXTRA-FEATURED-iMAGE.jpg"],"t11":["Calacatta Gold Mist","Quartz Tiles","2025/09/CALACATTA-GOLD-MIST-FI.jpg"],"t12":["Grigio Londra","Quartz Tiles","2025/09/Grigio-Londra-Slab-scaled-1.jpg"],"t14":["Foster Gold","Quartz Tiles","2025/09/FLOSTER-GOLD-FEATURED-iMAGE.jpg"],"s17":["Zurn One Wall-hung Toilet System with Sensor Flush Valve","Sanitary Ware","2025/07/Wall-Hung-Zurn-One-Toilet-System-with-Top-Mount-1.1-GPF-Battery-Powered-Sensor-Flush-Valve.jpg"],"s2":["Geberit Smyle Wall-hung WC, Square","WCs","2025/09/DAS_1473458.webp"],"s3":["Mechanical Sink Mixer","Mixers","2025/07/Mechanical-sink-mixer.jpg"],"s5":["Wall-mounted Electronic Liquid Soap Dispenser, 1 L","Soap Dispenser","2025/07/Wall-mounted-electronic-liquid-soap-dispenser-1-litre.jpg"],"s6":["Wall-mounted Paper Towel Dispenser, 750 Sheets","Washroom Accessories","2025/07/Wall-mounted-paper-towel-dispenser-for-750-sheets.jpg"],"s7":["Surface-Mounted Jumbo Toilet Tissue Dispenser","Toilet Tissue Dispensers","2025/07/Surface-Mounted-Jumbo-Toilet-Tissue-Dispenser-Satin-Finish-One-Roll.jpg"],"s8":["Recessed Sanitary Napkin Disposal, Satin Finish","Washroom Accessories","2025/07/Recessed-Sanitary-Napkin-Disposal-Satin-Finish-1.3-Gallon.jpg"],"s9":["Recessed Paper Towel Dispenser & Waste Receptacle","Washroom Accessories","2025/07/Recessed-Paper-Towel-Dispenser-and-Waste-Receptacle-Matte-Black-6.3-Gallon-Waste.jpg"],"s10":["Recessed Napkin-Tampon Dispenser, Satin Finish","Washroom Accessories","2025/07/Recessed-Napkin-Tampon-Dispenser-Free-Operation-Satin-Finish.jpg"],"s11":["Automatic Liquid Soap Dispenser, Satin Finish","Soap Dispenser","2025/07/Surface-Mounted-Automatic-Liquid-Soap-Dispenser-Satin-Finish-30-fl-oz.jpg"],"s12":["Kohler Evo Fit+ In-wall Tank","Sanitary Ware","2025/07/Evo-FitΓao.jpg"],"t2":["Stellar White","Quartz Tiles","2025/09/Stellar-White-scaled-1.jpg"],"t3":["Marquina Ultra","Quartz Tiles","2025/09/Marquina-Ultra-Slab-G7-FEATURED-iMAGE.jpg"],"t4":["Miraggio Gold","Quartz Tiles","2025/09/MIRAGGIO-GOLD-FEATURED-iMAGE.jpg"]};
+Object.keys(REAL).forEach(k => { const [n, c, i] = REAL[k]; Object.assign(ALL[k], { name: n, cat: c, img: encodeURI('assets/remote/publika/' + i) }); });
+[["w1","Geberit Selnova Comfort Square","2025/09/DAS_1191935_20180928.webp"],["w2","Geberit Selnova Comfort WC Seat Ring",""],["w3","Geberit Selnova Comfort WC Seat, Barrier-free",""],["w4","Geberit Smyle Floor","2025/09/geb.webp"],["w5","Geberit Smyle Set of Wall-hung",""],["w6","Geberit Smyle Set of Wall-hung WC","2025/09/DAS1.webp"],["w7","Geberit Smyle Square Floor-standing WC","2025/09/DAS_1523189_2019.webp"],["w8","Geberit Smyle Square WC Seat, Slim Design",""],["w9","Geberit Smyle Square WC Seat, Slim Design, Sandwich Shape",""],["w10","Geberit Smyle Wall-hung WC",""],["w11","Geberit Smyle WC Seat, Rounded Edge",""],["w15","TEMPOFLUX 3 Control Plate for WCs","2025/07/TEMPOFLUX-3-control-plate-for-WCs.jpg"],["w16","TEMPOMATIC Direct Flush Valve","2025/07/TEMPOMATIC-direct-flush-valve.jpg"],["w17","TEMPOMATIC Dual Control Plate for WCs",""],["w18","WC Control EDITION E Manual","2025/07/WC-control-EDITION-E-Manual.jpg"],["w19","WC Operating Panel EDITION Eco","2025/07/WC-operating-panel-EDITION-Eco.jpg"]].forEach(([id, n, i]) => { ALL[id] = { id, name: n, cat: 'WCs', ph: 'product shot', fit: 'contain', img: i ? 'assets/remote/publika/' + i : '' }; });
+[["wa1","The Retrofit Pint 0.125 gpf Concealed Ultra Low Consumption Urinal System",""],["wa2","19x16 Oval Undermount Lavatory",""],["wa3","Accliv",""],["wa4","Aqua-FIT Battery Powered Faucet",""],["wa5","Back Spud Wall Hung Flush Valve Toilet with ZurnSHIELD glaze",""],["wa6","Basic drop-down grab bar Ø 32mm, L. 850mm",""],["wa7","Basic straight grab bar Ø 32mm, 600mm",""],["wa8","Bau Cosmopolitan E Infra-red electronic basin mixer 1/2″ with mixing device and temperature limiter",""],["wa9","BauEdge 2-hole basin mixer",""],["wa10","BauEdge Single-lever sink mixer 1/2",""],["wa11","Camaya Series Sensor Faucet with Gear-driven Ceramic Cartridge, Hydropower",""],["wa12","COMBI Basic",""],["wa13","COMBI Light",""],["wa14","COMBI Premium",""],["wa15","comfort AURA",""],["wa16","comfort REACH",""],["wa17","comfort sero",""],["wa18","comfort STRATA",""],["wa19","COMPACT (2-IN-1)",""],["wa20","Concealed Hardwired Automatic Sensor Flush Valve",""],["wa21","Concealed WC flush valves COMPACT II",""],["wa22","Countertop Lavatory",""],["wa23","Cuff",""],["wa24","EcoVantage HET ADA Floor-mounted Toilet System",""],["wa25","EcoVantage HET Floor-mounted ADA Toilet System",""],["wa26","Essentials Master bathroom accessories set 5-in-1",""],["wa27","Euroeco Single-lever bath/shower mixer 1/2",""],["wa28","Eurosmart Cosmopolitan Perfect shower set with Tempesta 210",""],["wa29","Eurosmart Single-lever basin mixer 1/2″ S-Size",""],["wa30","Geberit Publica squatting pan",""],["wa31","Hardwired Automatic Sensor Flush Valve Closet with Integral Sensor",""],["wa32","HIGHFLOW high-speed hand dryer",""],["wa33","Hypereco single robe hook",""],["wa34","InstaDry Surface-Mounted Automatic Hand Dryer, ADA Compliant, Satin Finish",""],["wa35","Jumbo toilet paper dispenser - 200m",""],["wa36","Ladena",""],["wa37","LED Backlit Mirror (Outer Etched)",""],["wa38","Lift-up Comfort shower seat",""],["wa39","Pebble",""],["wa40","PREMIX COMPACT Thermostatic mixing valve",""],["wa41","Rapid SL 3-in-1 set for WC, 1.13 m installation height",""],["wa42","Recessed Convertible Auto Roll B-3974",""],["wa43","Recessed Paper Towel Dispenser B-38033",""],["wa44","Semi-Pedestal Only Lavatory",""],["wa45","Shower Dressing Area Seat, Ivory Phenolic and Satin Finish, 18″ Wide",""],["wa46","Surface-Mounted Double Coat Hook, Cubicle Collection, Satin Finish",""],["wa47","Surface-Mounted Seat Cover Dispenser, Satin Finish",""],["wa48","Surface-Mounted Waste Receptacle, Satin Finish, 6.4-Gallon",""],["wa49","Swing-Up Grab Bar, Satin Finish",""],["wa50","Tempesta-F Wall holder set 1 spray",""],["wa51","TEMPOMATIC MIX 4 electronic mixer",""],["wa52","TEMPOSTOP time flow shower valve",""],["wa53","TONIC JET shower head",""],["wa54","Urinal, Zurn One System with 0.125 GPF Top Mount, Battery Powered Sensor Flush Valve",""],["wa55","Vive wall hung toilet bundle in White",""],["wa56","Wall-mounted 304 stainless steel bin, 25 litres",""],["wa57","Wall-Mounted Battery Powered Sensor Faucet",""],["wa58","WC operating panel MONTUS KONKAV",""]].forEach(([id, n, i]) => { ALL[id] = { id, name: n, cat: 'Washroom Accessories', ph: 'product shot', fit: 'contain', img: i ? 'assets/remote/publika/' + i : '' }; });
+[["wb1","Geberit Bambini Decorative Cover",""],["wb2","Geberit Bambini Decorative Cover (Variant)",""],["wb3","Geberit Bambini Decorative Cover, Front",""],["wb4","Geberit Bambini Decorative Cover, Front, for Play",""],["wb5","Geberit Bambini Decorative Cover, Front, for Play and Washspace, for Two Washbasin Taps",""],["wb6","Geberit Bambini Decorative Cover, Side",""],["wb7","Geberit Bambini Decorative Cover, Side, for Play",""],["wb8","Geberit Bambini Play and Washspace",""],["wb9","Geberit Bambini Play and Washspace (Variant)",""],["wb10","Geberit Bambini Play and Washspace, with Four Washbasin",""],["wb11","Geberit Bambini Play and Washspace, with Four Washbasin Areas",""],["wb12","Geberit Bambini Play and Washspace, with Three Washbasin Areas",""],["wb13","Geberit Bambini Play and Washspace, with Two Washbasin Areas","2025/09/klklk.webp"],["wb14","Geberit Bambini Washbasin for Children","2025/09/DAS_469704_20191112_16245.webp"],["wb15","Geberit Bambini Washbasin with Recessed Sponge Tray",""],["wb16","Geberit Publica Cleaner Sink","2025/09/DAS_469634_20220906_090448.webp"],["wb17","Geberit Publica Hinged Grating",""],["wb18","Geberit Publica Sink Rim Guard",""],["wb19","Geberit Publica Slop Hopper with Hinged Grating",""],["wb20","Geberit Set of Mounting Brackets for Play and Washspace",""]].forEach(([id, n, i]) => { ALL[id] = { id, name: n, cat: 'Wash Basin', ph: 'product shot', fit: 'contain', img: i ? 'assets/remote/publika/' + i : '' }; });
+[["tp1","Draw-off Valve","Taps"],["tp2","Electronic Wash Basin Tap CELIS E²","Taps"],["tp3","Exposed Wash Basin Tap MODUS E","Taps"],["tp4","Exposed Wash Basin Tap PETIT SC","Taps"],["tp5","Geberit Bambini Mini Thermostat","Taps"],["tp6","Geberit Bambini Tap Aerator for Washbasin Tap","Taps"],["tp7","Geberit Bambini Washbasin Tap","Taps"],["tp8","Geberit Bambini Washbasin Tap (Variant)","Taps"],["tp9","Geberit Bambini Washbasin Tap, Battery","Taps"],["tp10","Geberit Bambini Washbasin Tap, Battery Operation","Taps"],["tp11","Geberit Bambini Washbasin Tap, Mains Operation","Taps"],["tp12","Geberit Bambini Washbasin Tap, Mains Operation (Variant)","Taps"],["tp13","Geberit Bambini Washbasin Tap, Single-lever","Taps"],["tp14","Self-closing Wash Basin Mixer PETIT SC","Taps"],["tt1","Geberit Duofix Element for Wall-hung WC, 112 cm","Toilet Tanks"]].forEach(([id, n, c]) => { ALL[id] = { id, name: n, cat: c, ph: 'product shot', fit: 'contain', img: '' }; });
+[["bs1","Koala Kare KB300 Horizontal Surface-Mounted Baby Changing Station","Baby Station"],["bs2","Koala Kare KB310-SSWM Horizontal Stainless Baby Changing Station","Baby Station"],["bs3","Koala Kare KB311-SSRE Vertical Stainless Steel Baby Changing Station","Baby Station"],["bs4","Koala Kare KB311-SSWM Vertical Stainless Baby Changing Station","Baby Station"],["bf1","Oasis Bottle Filler DGM-BC-GRN 507604","Bottle Fillers"],["bf2","Oasis Bottle Filler PGVDFMVDBFSL 507641","Bottle Fillers"]].forEach(([id, n, c]) => { ALL[id] = { id, name: n, cat: c, ph: 'product shot', fit: 'contain', img: '' }; });
+['tp1','s16'].forEach(id => { if (ALL[id]) ALL[id].also = [...(ALL[id].also || []), 'Appliance Connection Fittings']; });
+const IMGFIX = {"wa3":"2025/07/AcclivΓao.jpg","wa4":"2025/07/Aqua-FIT┬-Battery-Powered-Faucet.jpg","wa12":"2025/08/smixin_basic.png","wa2":"2025/07/19_x16_-Oval-Undermount-Lavatory.jpg","wa5":"2025/07/Z5617_AL.avif","wa20":"2025/07/Concealed-Hardwired-Automatic-Sensor-Flush-Valve.jpg","wa21":"2025/07/Concealed-WC-flush-valves-COMPACT-II.jpg","wa22":"2025/07/Countertop-Lavatory.jpg","wa31":"2025/07/Hardwired-Automatic-Sensor-Flush-Valve-Closet-with-Integral-Sensor.jpg","wa32":"2025/07/HIGHFLOW-high-speed-hand-dryer.jpg","wa33":"2025/07/Hypereco-single-robe-hook.jpg","wa38":"2025/07/Lift-up-Comfort-shower-seat.jpg","wa40":"2025/07/PREMIX-COMPACT-Thermostatic-mixing-valve.jpg","wa44":"2025/07/Semi-Pedestal-Only-Lavatory.jpg","wa46":"2025/07/Surface-Mounted-Double-Coat-Hook-Cubicle-Collection-Satin-Finish.jpg","wa47":"2025/07/Surface-Mounted-Seat-Cover-Dispenser-Satin-Finish.jpg","wa49":"2025/07/Swing-Up-Grab-Bar-Satin-Finish.jpg","wa51":"2025/07/TEMPOMATIC-MIX-4-electronic-mixer.jpg","wa53":"2025/07/TONIC-JET-shower-head.jpg","wa55":"2025/07/Vive-wall-hung-toilet-bundle-in-White.jpg","wa56":"2025/07/Wall-mounted-304-stainless-steel-bin-25-litres.jpg","wa57":"2025/07/Wall-Mounted-Battery-Powered-Sensor-Faucet.jpg","wa58":"2025/07/WC-operating-panel-MONTUS-KONKAV.jpg","wa13":"2025/08/smixin_light.png","wa14":"2025/08/Mask-group-7.png","wa18":"2025/08/strata.png","wa16":"2025/08/Screenshot-2025-06-18-at-8.32.15.png","wa17":"2025/08/Screenshot-2025-06-18-at-8.21.02.png","wa19":"2025/08/6L3A5094-Modifier-scaled-1-1365x2048-1.jpg","wa36":"2025/07/LadenaΓao.jpg","wa9":"2025/07/BAUEDGE-2-HOLE-BASIN-MIXER.jpg","wa27":"2025/07/32743000_1_1.jpg","wa8":"2025/07/2ΓC│-WITH-MIXING-DEVICE-AND-TEMPERATURE-LIMITER.jpg","wa10":"2025/07/2ΓC│.jpg","wa11":"2025/07/Camaya-Series┬-Sensor-Faucet-with-Gear-driven-Ceramic-Cartridge-Hydropower.jpg","wa29":"2025/07/2ΓC│-S-SIZE.jpg","wa26":"2025/07/ESSENTIALS-MASTER-BATHROOM-ACCESSORIES-SET-5-IN-1.jpg","wa24":"2025/07/Z5665.avif","wa28":"2025/07/EUROSMART-COSMOPOLITAN-PERFECT-SHOWER-SET-WITH-TEMPESTA-210.jpg","wa41":"2025/07/RAPID-SL-3-IN-1-SET-FOR-WC-1.13-M-INSTALLATION-HEIGHT.jpg","wa1":"2025/07/The-Retrofit-Pint┬ΓC¥-0.125-gpf-Concealed-Ultra-Low-Consumption-Urinal-System.jpg","wa54":"2025/07/Urinal-Zurn-One-System-with-0.125-GPF-Top-Mount-Battery-Powered-Sensor-Flush-Valve.jpg","wa6":"2025/07/Basic-drop-down-grab-bar-├y-32mm-L.-850mm.jpg","wa7":"2025/07/png_350506S_1.png","wa50":"2025/07/ZZF_27513001_003_01_1_1.jpg","wa25":"2025/07/EcoVantage┬-HET-Floor-mounted-ADA-Toilet-System-1.jpg","bs1":"2025/09/KB300-00_closed.jpg","bf1":"2025/07/OUTDOOR-FREE-STANDING-BOTTLE-FILLER-NON-REFRIGERATED.jpg","tp7":"2025/09/DAS_3390826_20230809_103018.webp","tp1":"2025/07/Draw-off-valve.jpg","tp2":"2025/07/Electronic-wash-basin-tap-CELIS-E┬▓.jpg","tp3":"2025/07/Exposed-wash-basin-tap-MODUS-E.jpg","tp4":"2025/07/Exposed-wash-basin-tap-PETIT-SC.jpg","tp5":"2025/09/DAS_793464_20200619_125711.webp","tp14":"2025/07/Self-closing-wash-basin-mixer-PETIT-SC.jpg","bf2":"2025/07/OUTDOOR-VANDAL-RESISTANT-BI-LEVEL-DRINKING-FOUNTAIN-WITH-OUTDOOR-MECHANICAL-BOTTLE-FILLER-FILTERED-NON-REFRIGERATED.jpg","tp6":"2025/09/DAS_837471_20191112_170812.webp","tp8":"2025/09/DAS_837436_20200928_144441.webp","tp9":"2025/09/DAS_837432_20200928_144439.webp","tp10":"2025/09/DAS_2209199_20210705_074328.webp","tp11":"2025/09/DAS_4395950_20240830_144851.webp","tp12":"2025/09/DAS_2209200_20210705_074332.webp","tp13":"2025/09/DAS_837435_20191112_170811.webp","bs2":"2025/09/KB310-SSWM_straight_closed.jpg","bs3":"2025/09/KB311-SSRE_straight_closed.jpg","bs4":"2025/09/KB311-SSWM_straight_closed.jpg","wb1":"2025/09/DAS_2671.webp","wb2":"2025/09/DAS_2671760_20220607_101703.webp","wb3":"2025/09/DAS_2671756_20220607_101056.webp","wb4":"2025/09/DAS_2671750_20220607_100130.webp","wb6":"2025/09/DAS_2671731_20220607_092950.webp","wb7":"2025/09/DAS_2671734_20220607_093419.webp","wb5":"2025/09/DAS_2671766_20220607_102240.webp","wb8":"2025/09/sami.webp","wb15":"2025/09/kmt.webp","wb9":"2025/09/kkkp.webp","wb10":"2025/09/DAS_338.webp","wb11":"2025/09/DAS_3387202_20230804_131454.webp","wb12":"2025/09/lim.webp","wb17":"2025/09/DAS_469635_20191112_162513.webp","wb18":"2025/09/DAS_469593_20220609_095017.webp","wb19":"2025/09/DAS_537076_20170925_155349.webp","wa15":"2025/08/Screenshot-2025-06-18-at-8.21.08.png","wb20":"2025/09/mbs.webp","wa23":"2025/07/CuffΓao.jpg","wa30":"2025/09/DAS_545840_20191104_150703.webp","wa34":"2025/07/BOB-B-7125_CA-1-2.jpg","wa35":"2025/07/Jumbo-toilet-paper-dispenser-200m.jpg","wa39":"2025/07/PebbleΓao.jpg","wa45":"2025/07/Dressing-Area-Seat-Ivory-Phenolic-and-Satin-Finish-18_-Wide-1.jpg","wa42":"2025/08/BOB-B-3974_CA.jpg","wa43":"2025/08/bobrick-1-scaled.jpg","wa52":"2025/07/png_749128_1-1.png","w17":"2025/07/png_464000_1.png"};
+Object.keys(IMGFIX).forEach(id => { if (ALL[id]) ALL[id].img = encodeURI('assets/remote/publika/' + IMGFIX[id]); });
+const EXTIMG = {"ct1":"assets/remote/webstaurant/large/116907/2743547.jpg","ct2":"assets/remote/webstaurant/large/116907/2743547.jpg","wa48":"assets/remote/partitionplus/catalog/partitionplus-bobrick-official/round2/b-279-632/01-hero-bob-b-279-ca-900x900.jpg","w5":"assets/remote/unitrade/DAS_1150812_20180912_094838_1561380035_10.jpg","w9":"assets/remote/unitrade/DAS_1150812_20180912_094838_1561380035_10.jpg","w10":"assets/remote/unitrade/DAS_1106316_20180824_132212_1561380045_7.jpg","tt1":"assets/remote/unitrade/UEB%20photos_1540294976_10.jpg","w2":"assets/remote/unitrade/das-386951_1542012757_2.jpg","w3":"assets/remote/unitrade/DAS_334334_20190718_101225_1568730064_9.jpg","wa37":"assets/remote/partitionplus/catalog/partitionplus-bobrick-official/round2/b-167-342/01-hero-bob-b-167-ca-bg-k-900x900.jpg","w8":"assets/remote/geberitconcept/2021/06/smyleSquareWCdaska-1.jpg","w11":"assets/geberit-smyle-seat-rounded.png","ct3":"assets/bobrick-b-43944.png","t5":"assets/bianco-oro.png","t6":"assets/bianco-river.png","t7":"assets/bianco-superiore.png","t16":"assets/carara-classico-superior.png"};
+Object.keys(EXTIMG).forEach(id => { if (ALL[id]) ALL[id].img = EXTIMG[id]; });
+[["ct1","Recessed Convertible Paper Towel Dispenser B-3944","Combination Towel"],["ct2","Recessed Convertible Paper Towel Dispenser B-3944 (Variant)","Combination Towel"],["ct3","Recessed Paper Towel Dispenser B-43944","Combination Towel"],["es1","Single Jet Shower Kit","Electronic Showers"]].forEach(([id, n, c]) => { ALL[id] = { id, name: n, cat: c, ph: 'product shot', fit: 'contain', img: '' }; });
+['wa22'].forEach(id => { if (ALL[id]) ALL[id].also = [...(ALL[id].also || []), 'Wash Basin']; });
+['wa36'].forEach(id => { if (ALL[id]) ALL[id].also = [...(ALL[id].also || []), 'Wash Basin']; });
+["s3","s4","s5","s6","s7","s8","s9","s10","s11","s12","s13","s16","s17","w15","w16","w17","w19"].forEach(id => { if (ALL[id]) ALL[id].also = ['Washroom Accessories']; });
+[["pz1","Calacatta Elegante","2025/09/Calacatta-Elegante-Full-Slab-View-1-scaled-1.jpg"],["pz2","Gris Venato","2025/09/Gris-Venato-Slab-scaled-1.jpg"],["pz3","Marquina Ultra","2025/09/Marquina-Ultra-Slab-G7-FEATURED-iMAGE.jpg"],["pz4","Calacatta Gold Mist","2025/09/CALACATTA-GOLD-MIST-FI.jpg"],["pz5","Calacatta Imperiale","2025/09/CALACATTA-IMPERIAL-SLAB-scaled-1.jpg"],["pz6","Calacatta Nero","2025/09/CALACATTA-NERO-scaled-1.jpg"],["pz7","Calacatta Pristine","2025/09/Calacatta-Pristine-Close-Up-View-2-3-scaled-1.jpg"],["pz8","Calacatta Rivolo","2025/09/Calacatta-Rivolo-Full-Slab-View-1-scaled-1.jpg"]].forEach(([id, n, i]) => { ALL[id] = { id, name: n, cat: 'Quartz Tiles', ph: 'tile swatch', fit: 'cover', img: 'assets/remote/publika/' + i }; });
+const LISTS = {
+  featured: ['s1','t15','s20','t13','s16','f1','s4','t1'],
+  clearance: ['s3','s5','s7','s8','s10','s11','s13','t10','t11','t14','s17','t5','t6','t7','s18'],
+  sanitary: ['s2','s6','s9','s12','s14','s15'],
+  porcelain: ['pz1','pz2','pz3','pz4','pz5','pz6','pz7','pz8'],
+  frp: ['f2','f3','f4','f5']
+};
+const U = 'assets/remote/publika/';
+const SLIDES = [
+  { img: U + '2023/02/Slider-1-scaled.jpg', eyebrow: 'Publika Trading Co LLC', title: 'Delivering sustainable value & quality in building trust', text: 'A privately-owned family business specializing in offering a one-stop solution for architects.' },
+  { img: U + '2023/01/Slider-2-scaled.jpg', eyebrow: '15 years of experience', title: 'Creating a design-led extravagance', text: 'An efficient model that provides lasting, sustainable, high-quality products and services.' },
+  { img: U + '2023/01/Slider-3.jpg', eyebrow: 'International standards', title: 'Quality that redefines the look', text: 'From product compatibility testing to premium after-quality service, we provide products and services that comply with international standards.' },
+  { img: U + '2023/01/Slider-4.jpg', eyebrow: 'LEED-certified', title: 'Functional fittings & accessories for a perfect fit!', text: 'LEED-certified products with exceptional quality and lasting services for years to come.' }
+];
+const CLIENTS = ['2025/02/1-1024x200.webp','2025/02/2.png','2025/02/3.png','2025/02/4-e1740578089129.png','2025/02/5-e1740577359512.png','2025/02/6.png','2025/02/7.png','2025/02/8.png','2025/02/9.png','2025/02/10.png','2025/02/11-1024x683.png','2025/02/12.png','2025/02/13.png','2025/02/14.jpg','2025/02/15.png','2025/02/16-1024x683.png','2025/02/17-1024x303.png','2025/02/18.jpg','2025/02/bk-logo.png','2025/02/domino-logo.0eae8ba75d52baeba5a81.png'].map(s => U + s);
+const BLOGS = [
+  { tag: 'Bathroom Accessories', title: 'Elevate Your Space: The Best Bathroom Accessories and Renovation in Dubai', img: U + '2026/03/4-1024x596.png', url: 'Blogs.dc.html#elevate-your-space', excerpt: 'Your bathroom is more than just a room; it is a private retreat where you start and end your day. We provide high-quality products that redefine the look of your home.' },
+  { tag: 'Porcelain Tiles', title: 'Transform Your Home with Premium Porcelain Tiles and Professional Renovation in Dubai', img: U + '2026/03/3-1024x596.png', url: 'Blogs.dc.html#premium-porcelain-tiles', excerpt: 'Choosing the right flooring is a big step in making your home look beautiful. Porcelain tiles are a top choice because they are strong and look very elegant.' },
+  { tag: 'Sanitary Ware', title: 'The Ultimate Guide to Premium Sanitary Ware and Bathroom Renovation in Dubai', img: U + '2026/03/2-1024x596.png', url: 'Blogs.dc.html#premium-sanitary-ware-guide', excerpt: 'A beautiful bathroom makes your home feel like a luxury hotel. Choosing the right fixtures is the most important step for a perfect home.' }
+];
+const PROJECTS = [
+  { tag: 'Latest Project', title: 'Commercial Washroom Fit-out', img: U + 'elementor/thumbs/IMG_3915-scaled-rnvdy1xslci8xxc8zj4a4olehs0gqtknp7jmtg6j98.jpg', url: 'Projects.dc.html#commercial-washroom-fit-out' },
+  { tag: 'Latest Project', title: 'Washroom Fixtures & Accessories Installation', img: U + 'elementor/thumbs/IMG_334-rnvdy1xslci8xxc8zj4a4olehs0gqtknp7jmtg6j98.jpg', url: 'Projects.dc.html#washroom-fixtures-installation' },
+  { tag: 'Latest Project', title: 'Public Washroom Accessories Package', img: U + 'elementor/thumbs/B-165_B-3944_B-823_productLS-v5-rnvdy1xslci8xxc8zj4a4olehs0gqtknp7jmtg6j98.jpg', url: 'Projects.dc.html#public-washroom-accessories-package' }
+];
+const DESC = {
+  s1: 'The Delabie S21 S wall-hung WC pan, available from Publika in Dubai, is made from 1.5 mm bacteriostatic 304 stainless steel with a seam-free, one-piece pressed bowl for better hygiene. Water-saving from 4 L per flush and compatible with standard frame systems, it is built for public, commercial and high-traffic washrooms across the UAE.',
+  t15: 'Calacatta Rivolo quartz features flowing gold and grey veins across a bright white base for a luxurious marble effect. Durable and easy to maintain, it suits kitchen countertops, bathroom vanities, floors and statement walls in modern homes and hospitality projects across Dubai and the UAE.',
+  s20: 'The Geberit Selnova Comfort wall-hung WC brings Swiss sanitary engineering to bathrooms in Dubai. Its raised comfort height makes sitting down and standing up easier, and the wall-hung design keeps floors clear for quick cleaning in homes, hotels, healthcare and commercial washrooms.',
+  t13: 'Calacatta Nero quartz pairs a deep black base with bold white veining for a dramatic, high-end look. Ideal for feature walls, kitchen islands and vanity tops, it gives residential and commercial interiors in Dubai a distinctive statement surface.',
+  s16: 'The Schell MONTUS WC module is a self-supporting frame with a 12 cm concealed cistern for wall-mounted WCs. Dual flush with a 3 L eco volume and adjustable main flush helps cut water use, making it a reliable choice for stud-wall and pre-wall installations in UAE construction projects.',
+  f1: 'Food-grade glossy FRP sheets from Publika provide a seamless, hygienic wall finish for commercial kitchens, food-processing units, cold rooms and hospitals in Dubai. Moisture resistant and easy to wash down, they help meet strict UAE food safety and hygiene standards.',
+  s4: 'The Delabie TEMPOMIX 3 is a wall-mounted, soft-touch time flow basin mixer with a chrome-plated solid brass body. Pre-set to around 7 seconds and 3 L per minute, it delivers up to 85% water savings, ideal for public washrooms, schools, malls and offices in Dubai.',
+  t1: 'Alluring quartz combines a striking natural pattern with the strength of engineered stone. Non-porous and low maintenance, it is a stylish, durable choice for kitchen worktops, bathroom vanities and interior walls in residential and commercial spaces across Dubai and the UAE.'
+};
+const SPECS = {
+  s1: [['Shield','Material','304 stainless steel, 1.5 mm'],['Drop','Water saving','Works from 4 L flush'],['Check','Warranty','30 years']],
+  t15: [['Shield','Surface','Engineered quartz'],['Ruler','Format','Full slab'],['Check','Look','Gold & grey veining']],
+  s20: [['Check','Brand','Geberit'],['Ruler','Height','Comfort height'],['Shield','Mounting','Wall-hung']],
+  t13: [['Shield','Surface','Engineered quartz'],['Ruler','Format','Full slab'],['Check','Look','Black with white veins']],
+  s16: [['Ruler','Size','W 50 x H 115 cm'],['Drop','Dual flush','3 L eco / 4–7 L main'],['Shield','Load capacity','Up to 400 kg']],
+  f1: [['Check','Hygiene','Food-grade surface'],['Drop','Moisture','Water resistant'],['Shield','Durability','Impact resistant']],
+  s4: [['Drop','Water saving','Up to 85%'],['Bolt','Operation','Soft-touch, ~7 s flow'],['Shield','Warranty','30 years']],
+  t1: [['Shield','Surface','Engineered quartz'],['Ruler','Format','Full slab'],['Leaf','Use','Floors, walls & counters']]
+};
+const EMPTY_FORM = { name: '', email: '', phone: '', message: '' };
+
+class Component extends DCLogic {
+  state = { idx: 0, started: false, cart: (() => { try { return JSON.parse(localStorage.getItem('publika_cart') || '[]').filter(id => ALL[id]); } catch (e) { return []; } })(), menuOpen: false, mobileNav: false, drawer: false, toast: '', w: 1280, form: { ...EMPTY_FORM }, sent: false, error: '' };
+  formRef = React.createRef();
+  clrRef = React.createRef();
+
+  componentDidMount() {
+    this.onCardClick = e => { if (e.target.closest('button, a, input, textarea, select')) return; const c = e.target.closest('[data-href]'); if (c && c.dataset.href) window.location.href = c.dataset.href; };
+    document.addEventListener('click', this.onCardClick);
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    this.onResize();
+    window.addEventListener('resize', this.onResize);
+    this.startT = setTimeout(() => this.setState({ started: true }), 80);
+    this.startTimer();
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer); clearTimeout(this.startT); clearTimeout(this.toastT);
+    window.removeEventListener('resize', this.onResize);
+  }
+  componentDidUpdate(pp) { if (pp.slideSeconds !== this.props.slideSeconds) this.startTimer(); }
+  dur() { return (this.props.slideSeconds ?? 4) * 1000; }
+  startTimer() {
+    clearInterval(this.timer);
+    this.timer = setInterval(() => this.setState(s => ({ idx: (s.idx + 1) % SLIDES.length })), this.dur());
+  }
+  go(i) { this.setState({ idx: (i + SLIDES.length) % SLIDES.length }); this.startTimer(); }
+  toggle(id) {
+    this.setState(s => {
+      const has = s.cart.includes(id);
+      const next = has ? s.cart.filter(x => x !== id) : [...s.cart, id]; try { localStorage.setItem('publika_cart', JSON.stringify(next)); } catch (e) {}
+      return { cart: next, toast: has ? '' : ALL[id].name + ' added to cart' };
+    });
+    clearTimeout(this.toastT);
+    this.toastT = setTimeout(() => this.setState({ toast: '' }), 2600);
+  }
+  scrollToForm() {
+    const el = this.formRef.current; if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+  }
+  scroller(k, step = 536) {
+    const ref = this['_' + k] || (this['_' + k] = React.createRef());
+    const by = dir => {
+      const el = ref.current; if (!el) return;
+      const max = el.scrollWidth - el.clientWidth;
+      if (dir > 0 && el.scrollLeft >= max - 4) el.scrollTo({ left: 0, behavior: 'smooth' });
+      else if (dir < 0 && el.scrollLeft <= 4) el.scrollTo({ left: max, behavior: 'smooth' });
+      else el.scrollBy({ left: dir * step, behavior: 'smooth' });
+    };
+    return { [k + 'Ref']: ref, [k + 'Prev']: () => by(-1), [k + 'Next']: () => by(1) };
+  }
+  setField(k) { return e => { const v = e.target.value; this.setState(s => ({ form: { ...s.form, [k]: v }, error: '' })); }; }
+
+  searchVals() {
+    const q = this.state.sq || '';
+    const terms = q.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    const idx = window.PUBLIKA_INDEX || [];
+    let res = [];
+    if (terms.length) {
+      res = idx.map(x => { const hay = (x.l + ' ' + (x.s || '') + ' ' + x.c).toLowerCase(); if (!terms.every(t => hay.includes(t))) return null; const ln = x.l.toLowerCase(); const score = (ln.startsWith(terms[0]) ? 0 : ln.includes(terms[0]) ? 1 : 2) + (x.t === 'Product' ? 0.5 : 0); return { x, score }; })
+        .filter(Boolean).sort((a, b) => a.score - b.score).slice(0, 10).map(({ x }) => ({ ...x, hasImg: !!x.i, noImg: !x.i, meta: x.t === 'Product' ? x.s + ' · ' + x.c : x.t === 'Sub-category' ? 'Sub-category · ' + x.c : 'Category', go: () => { window.location.href = x.h; } }));
+    }
+    return {
+      sq: q, sqResults: res, sqOpen: !!this.state.sqFocus && terms.length > 0, sqNone: terms.length > 0 && res.length === 0,
+      sqSet: e => this.setState({ sq: e.target.value, sqFocus: true }),
+      sqFocus: () => this.setState({ sqFocus: true }),
+      sqBlur: () => setTimeout(() => this.setState({ sqFocus: false }), 150),
+      sqKey: e => { if (e.key === 'Enter' && res[0]) window.location.href = res[0].h; if (e.key === 'Escape') this.setState({ sqFocus: false }); }
+    };
+  }
+  renderVals() {
+    const { idx, started, cart, form } = this.state;
+    const zoom = this.props.zoom ?? 0.12;
+    const d = this.dur();
+    const origins = ['center center', 'left center', 'right center', 'center top'];
+    const card = id => { const p = ALL[id]; const inCart = cart.includes(id); return { ...p, href: 'Product.dc.html#' + id, inCart, notInCart: !inCart, onAdd: () => this.toggle(id) }; };
+    const FRPI = { f2: 'icEmboss', f3: 'icSmooth', f4: 'icCeiling', f5: 'icFire' };
+    const map = k => LISTS[k].map(id => ({ ...card(id), showIcon: !!FRPI[id] && !ALL[id].img, showSlot: !(FRPI[id] && !ALL[id].img), [FRPI[id] || 'icNone']: true, isFeatured: k === 'featured', isClearance: k === 'clearance', isDefault: k !== 'featured' && k !== 'clearance' }));
+    const slides = SLIDES.map((s, i) => {
+      const on = i === idx;
+      return {
+        ...s, n: i + 1,
+        opacity: on ? 1 : 0, z: on ? 2 : 1, pe: on ? 'auto' : 'none',
+        scale: on && started ? 1 + zoom : 1,
+        zoomTransition: on ? `transform ${d + 1400}ms cubic-bezier(.25,.1,.25,1)` : 'transform 0ms linear 1300ms',
+        origin: origins[i % 4],
+        textY: on ? '0px' : '24px',
+        bar: on && started ? '100%' : '0%',
+        barTransition: on && started ? `width ${d}ms linear` : 'none',
+        go: () => this.go(i)
+      };
+    });
+    const FRPX = [['fx1','FRP Wall Panel, White Gloss'],['fx2','FRP Hygienic Cladding Sheet'],['fx3','FRP Textured Panel, Pebble'],['fx4','FRP Joint Trim (H-Moulding)'],['fx5','FRP Inside Corner Trim'],['fx6','FRP Outside Corner Trim'],['fx7','FRP Cap Moulding']];
+    FRPX.forEach(([id, n]) => { if (!ALL[id]) ALL[id] = { id, name: n, cat: 'FRP Panels', ph: 'product shot', fit: 'contain', img: '' }; });
+    const pc = id => { const p = ALL[id]; return { id, isClr: LISTS.clearance.includes(id), href: 'Product.dc.html#' + id, name: p.name, img: p.img, fit: p.fit || 'contain', ph: p.ph, hasImg: !!p.img, noImg: !p.img }; };
+    return {
+      ...this.searchVals(),
+      prodSan: ['s1','s20','s2','s16','s12','s17','s4','s3'].map(pc),
+      prodTile: ['t1','t2','t3','t4','t8','t9','t13','t15'].map(pc),
+      prodFrp: ['f1','f2','f3','f4','f5','fx1','fx2','fx3'].map(pc),
+      showTopBar: this.props.showTopBar ?? true,
+      isDesktop: this.state.w >= 1040, isMobile: this.state.w < 1040,
+      mobileNavOpen: this.state.mobileNav && this.state.w < 1040,
+      menuOpen: this.state.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      toggleMobileNav: () => this.setState(s => ({ mobileNav: !s.mobileNav })),
+      closeMobileNav: () => this.setState({ mobileNav: false }),
+      slides,
+      prevSlide: () => this.go(idx - 1),
+      nextSlide: () => this.go(idx + 1),
+      featCounter: String((this.state.featSel || 0) + 1).padStart(2, '0') + ' / ' + String(LISTS.featured.length).padStart(2, '0'),
+      featSpot: LISTS.featured.map((id, i) => { const sel = this.state.featSel || 0; const on = i === sel; return { ...card(id), desc: DESC[id], specs: SPECS[id].map(([ic, label, value]) => ({ label, value, ['is' + ic]: true })), opacity: on ? 1 : 0, pe: on ? 'auto' : 'none', x: on ? '0px' : (i < sel ? '-24px' : '24px') }; }),
+      featPrev: () => this.setState(s => ({ featSel: ((s.featSel || 0) - 1 + LISTS.featured.length) % LISTS.featured.length })),
+      featNext: () => this.setState(s => ({ featSel: ((s.featSel || 0) + 1) % LISTS.featured.length })),
+      clearance: map('clearance'),
+      sanitary: map('sanitary'),
+      porcelain: map('porcelain'),
+      frp: map('frp'),
+      ...this.scroller('san'), ...this.scroller('por'), ...this.scroller('frp'), ...this.scroller('cat', 400), ...this.scroller('blog', 400), ...this.scroller('proj', 400),
+      clrRef: this.clrRef,
+      clrPrev: () => this.clrRef.current && this.clrRef.current.scrollBy({ left: -536, behavior: 'smooth' }),
+      clrNext: () => this.clrRef.current && this.clrRef.current.scrollBy({ left: 536, behavior: 'smooth' }),
+      clients: CLIENTS, blogs: BLOGS, projects: PROJECTS,
+      cartCount: cart.length,
+      cartEmpty: cart.length === 0,
+      cartItems: cart.map(card),
+      drawerOpen: this.state.drawer,
+      openDrawer: () => this.setState({ drawer: true, toast: '' }),
+      closeDrawer: () => this.setState({ drawer: false }),
+      requestQuote: () => { window.location.href = 'Cart.dc.html'; },
+      hasToast: !!this.state.toast, toast: this.state.toast,
+      formRef: this.formRef, form,
+      setName: this.setField('name'), setEmail: this.setField('email'), setPhone: this.setField('phone'), setMessage: this.setField('message'),
+      hasError: !!this.state.error, error: this.state.error,
+      sent: this.state.sent, notSent: !this.state.sent,
+      submit: e => {
+        e.preventDefault();
+        if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) return this.setState({ error: 'Please fill in your name, email and phone number.' });
+        if (!/^\S+@\S+\.\S+$/.test(form.email)) return this.setState({ error: 'Please enter a valid email address.' });
+        this.setState({ sent: true, error: '' });
+      },
+      resetForm: () => this.setState({ sent: false, form: { ...EMPTY_FORM } })
+    };
+  }
+}
+</script>
+</body>
+</html>
